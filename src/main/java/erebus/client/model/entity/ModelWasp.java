@@ -1,15 +1,14 @@
 package erebus.client.model.entity;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityWasp;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 
 @SideOnly(Side.CLIENT)
 public class ModelWasp extends ModelBase {
@@ -347,6 +346,7 @@ public class ModelWasp extends ModelBase {
 		ThxLW.render(unitPixel);
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		RWingBack.render(unitPixel);
 		RWingMid.render(unitPixel);
 		RWingFront.render(unitPixel);

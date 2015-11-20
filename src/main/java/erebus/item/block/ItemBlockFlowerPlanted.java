@@ -23,7 +23,7 @@ public class ItemBlockFlowerPlanted extends ItemBlockGeneric {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		String colour = EnumColour.values()[Utils.getFlowerMetadata(stack)].getTranslatedName();
-		return String.format(StatCollector.translateToLocal(getUnlocalizedName() + ".name"), colour);
+		String colour = EnumColour.values()[Utils.getFlowerMetadata(stack)].getUnlocalisedName();
+		return StatCollector.translateToLocal("tile.erebus.flower_planted_" + colour + ".name");
 	}
 }

@@ -1,16 +1,20 @@
 package erebus.client.model.armor;
 
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModItems;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
-
+@SideOnly(Side.CLIENT)
 public class ModelArmorPowered extends ModelBiped {
+
 	ModelRenderer Body;
 	ModelRenderer RArm;
 	ModelRenderer LArm;
@@ -103,14 +107,30 @@ public class ModelArmorPowered extends ModelBiped {
 		GL11.glPopMatrix();
 		RWingbase.render(unitPixel);
 		LWingbase.render(unitPixel);
+
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+		if (entity instanceof EntityLivingBase) {
+			EntityLivingBase living = (EntityLivingBase) entity;
+			ItemStack chestplate = living.getEquipmentInSlot(3);
+			if (chestplate != null && chestplate.getItem() == ModItems.armorGliderPowered && ModItems.armorGliderPowered.hasColor(chestplate)) {
+				int colour = ModItems.armorGliderPowered.getColor(chestplate);
+				float red = (colour >> 16 & 255) / 255.0F;
+				float green = (colour >> 8 & 255) / 255.0F;
+				float blue = (colour & 255) / 255.0F;
+				GL11.glColor3f(red, green, blue);
+			}
+		}
+
 		RWingUpgradeTop.render(unitPixel);
 		RWingUpgradeMid.render(unitPixel);
 		RWingUpgradeBottom.render(unitPixel);
 		LWingUpgradeTop.render(unitPixel);
 		LWingUpgradeMid.render(unitPixel);
 		LWingUpgradeBottom.render(unitPixel);
+		GL11.glColor3f(1, 1, 1);
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
 	}
@@ -124,7 +144,8 @@ public class ModelArmorPowered extends ModelBiped {
 	@Override
 	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
+
+		prevLimbSwing /= 100;
 		RArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * prevLimbSwing * 0.5F;
 		LArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * prevLimbSwing * 0.5F;
 		if (!isGliding && !isPowered) {
@@ -135,7 +156,7 @@ public class ModelArmorPowered extends ModelBiped {
 			LWingUpgradeMid.rotateAngleZ = 0F;
 			LWingUpgradeBottom.rotateAngleZ = 0F;
 
-			if (player.prevPosX != player.posX || player.prevPosZ != player.posZ) {
+			if (entity.prevPosX != entity.posX || entity.prevPosZ != entity.posZ) {
 				RWingUpgradeTop.rotateAngleX = 0.7F;
 				RWingUpgradeMid.rotateAngleX = 0.7F;
 				RWingUpgradeBottom.rotateAngleX = 0.7F;
@@ -152,7 +173,7 @@ public class ModelArmorPowered extends ModelBiped {
 				LWingUpgradeBottom.rotateAngleX = 0F;
 			}
 		}
-		if (isGliding || isPowered && !player.onGround) {
+		if (isGliding || isPowered && !entity.onGround) {
 			RWingUpgradeTop.rotateAngleZ = 1.570796F;
 			RWingUpgradeMid.rotateAngleZ = 1.570796F;
 			RWingUpgradeBottom.rotateAngleZ = 1.570796F;
@@ -169,7 +190,7 @@ public class ModelArmorPowered extends ModelBiped {
 				LWingUpgradeBottom.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
 			}
 		}
-		if (player.isSneaking()) {
+		if (entity.isSneaking()) {
 			Body.rotateAngleX = 0.4F;
 			RArm.rotateAngleX += 0.4F;
 			LArm.rotateAngleX += 0.4F;

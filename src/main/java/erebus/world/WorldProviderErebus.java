@@ -6,6 +6,7 @@ import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
@@ -24,12 +25,14 @@ public class WorldProviderErebus extends WorldProvider {
 
 	@Override
 	public boolean canRespawnHere() {
-		return true;
+		if (ConfigHandler.INSTANCE.allowRespawning)
+			return true;
+		return false;
 	}
 
 	@Override
 	public boolean canCoordinateBeSpawn(int x, int z) {
-		return true;
+		return this.worldObj.getTopBlock(x, z) != Blocks.bedrock && this.worldObj.getTopBlock(x, z) != Blocks.air;
 	}
 
 	@Override
@@ -45,7 +48,7 @@ public class WorldProviderErebus extends WorldProvider {
 		if (biome instanceof BiomeBaseErebus)
 			targetFogColor = ((BiomeBaseErebus) biome).getFogRGB();
 		else
-			targetFogColor = new short[]{255, 255, 255};
+			targetFogColor = new short[] { 255, 255, 255 };
 
 		if (currentFogColor == null) {
 			currentFogColor = new double[3];
@@ -93,6 +96,11 @@ public class WorldProviderErebus extends WorldProvider {
 	@Override
 	public boolean isSurfaceWorld() {
 		return false;
+	}
+
+	@Override
+	public int getActualHeight() {
+		return 128;
 	}
 
 	@Override

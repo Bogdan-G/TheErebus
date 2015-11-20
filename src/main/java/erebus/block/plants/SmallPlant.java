@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,12 +19,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.item.ItemMaterials;
 
 public class SmallPlant extends BlockTallGrass {
 	protected final String name;
@@ -57,17 +57,17 @@ public class SmallPlant extends BlockTallGrass {
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune) {
 		if ("nettle".equals(name)) {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-			ret.add(ItemMaterials.DATA.nettleleaves.createStack());
+			ret.add(ItemMaterials.DATA.nettleleaves.makeStack());
 			return ret;
 		} else if ("nettleFlowered".equals(name)) {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-			ret.add(ItemMaterials.DATA.nettleflowers.createStack());
+			ret.add(ItemMaterials.DATA.nettleflowers.makeStack());
 			return ret;
 		} else if ("swampPlant".equals(name) && world.rand.nextInt(8) == 0) {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 			ret.add(new ItemStack(ModItems.cabbageSeeds, 1, 0));
 			return ret;
-		} else if ("desertShrub".equals(name) || "mireCoral".equals(name) || "fireBloom".equals(name) || "swampPlant".equals(name)) {
+		} else if ("desertShrub".equals(name) || "mireCoral".equals(name) || "fireBloom".equals(name)) {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 			ret.add(new ItemStack(this));
 			return ret;

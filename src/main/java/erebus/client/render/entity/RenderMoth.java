@@ -33,7 +33,7 @@ public class RenderMoth extends RenderLiving {
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		EntityMoth entityMoth = (EntityMoth) entity;
-		switch (entityMoth.skin) {
+		switch (entityMoth.getSkin()) {
 			case 0:
 				return resource1;
 			case 1:

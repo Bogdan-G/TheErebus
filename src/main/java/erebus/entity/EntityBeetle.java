@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import erebus.ModItems;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -17,8 +19,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.item.ItemMaterials;
 
 public class EntityBeetle extends EntityAnimal {
 	int shagCount;
@@ -127,6 +127,7 @@ public class EntityBeetle extends EntityAnimal {
 			is.stackSize--;
 			setTame((byte) 1);
 			shagCount = 600;
+			worldObj.playSoundEffect(posX, posY, posZ, "erebus:beetlelarvamunch", 1.0F, 0.75F);
 			return true;
 		}
 		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.beetleTamingAmulet.ordinal()) {
@@ -147,7 +148,7 @@ public class EntityBeetle extends EntityAnimal {
 		int chance = rand.nextInt(3) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ItemMaterials.DATA.plateExo.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.plateExo.makeStack(), 0.0F);
 	}
 
 	@Override

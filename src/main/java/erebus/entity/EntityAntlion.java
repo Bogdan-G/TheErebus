@@ -1,5 +1,8 @@
 package erebus.entity;
 
+import erebus.ModBlocks;
+import erebus.entity.ai.EntityErebusAIAttackOnCollide;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,9 +20,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ItemMaterials;
 
 public class EntityAntlion extends EntityMob {
 
@@ -99,7 +99,7 @@ public class EntityAntlion extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ItemMaterials.DATA.plateExo.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.plateExo.makeStack(), 0.0F);
 	}
 
 	@Override

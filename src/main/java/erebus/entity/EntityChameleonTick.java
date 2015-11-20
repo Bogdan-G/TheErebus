@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -13,9 +14,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.item.ItemMaterials;
 
 public class EntityChameleonTick extends EntityMob {
+
 	public Block blockID;
 	public int blockMeta;
 	public int animation;
@@ -35,11 +36,6 @@ public class EntityChameleonTick extends EntityMob {
 	public void setBlock(Block blockID, int blockMeta) {
 		this.blockID = blockID;
 		this.blockMeta = blockMeta;
-	}
-
-	@Override
-	protected void entityInit() {
-		super.entityInit();
 	}
 
 	@Override
@@ -71,7 +67,7 @@ public class EntityChameleonTick extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ItemMaterials.DATA.camoPowder.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.camoPowder.makeStack(), 0.0F);
 	}
 
 	@Override
@@ -142,8 +138,7 @@ public class EntityChameleonTick extends EntityMob {
 
 	@Override
 	protected Entity findPlayerToAttack() {
-		EntityPlayer player = worldObj.getClosestVulnerablePlayerToEntity(this, 8.0D);
-		return player;
+		return worldObj.getClosestVulnerablePlayerToEntity(this, 8.0D);
 	}
 
 	@Override
@@ -151,10 +146,4 @@ public class EntityChameleonTick extends EntityMob {
 		if (distance > 0.0F && distance < 2.0F)
 			attackEntityAsMob(entity);
 	}
-
-	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		return super.attackEntityAsMob(entity);
-	}
-
 }

@@ -2,12 +2,14 @@ package erebus.core.handler;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -19,6 +21,29 @@ import erebus.tileentity.TileEntityBones;
 
 public class EntityDeathInventoryHandler {
 
+	private static final List<OffsetPos> offsets = new LinkedList<OffsetPos>();
+
+	static {
+		offsets.add(new OffsetPos(0, 0, 0));
+		offsets.add(new OffsetPos(0, 1, 0));
+		offsets.add(new OffsetPos(0, -1, 0));
+
+		offsets.add(new OffsetPos(1, 0, 0));
+		offsets.add(new OffsetPos(1, 0, 1));
+		offsets.add(new OffsetPos(-1, 0, 1));
+		offsets.add(new OffsetPos(-1, 0, -1));
+
+		offsets.add(new OffsetPos(1, 1, 0));
+		offsets.add(new OffsetPos(1, 1, 1));
+		offsets.add(new OffsetPos(-1, 1, 1));
+		offsets.add(new OffsetPos(-1, 1, -1));
+
+		offsets.add(new OffsetPos(1, -1, 0));
+		offsets.add(new OffsetPos(1, -1, 1));
+		offsets.add(new OffsetPos(-1, -1, 1));
+		offsets.add(new OffsetPos(-1, -1, -1));
+	}
+
 	@SuppressWarnings("unchecked")
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void playerDeath(LivingDeathEvent event) {
@@ -28,15 +53,21 @@ public class EntityDeathInventoryHandler {
 
 		if (event.entityLiving instanceof EntityPlayer && !world.getGameRules().getGameRuleBooleanValue("keepInventory")) {
 			final EntityPlayer player = (EntityPlayer) event.entityLiving;
-
+			ErebusExtendedPlayerProperties playerProps = ErebusExtendedPlayerProperties.get(player);
 			int x = MathHelper.floor_double(player.posX);
 			int y = MathHelper.floor_double(player.posY - 1);
 			int z = MathHelper.floor_double(player.posZ);
 			int playerFacing = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 			byte directionMeta = 0;
 
-			if (!world.isAirBlock(x, y, z))
-				y++;
+			for (OffsetPos offset : offsets)
+				if (world.getBlock(x + offset.x, y + offset.y, z + offset.z).isReplaceable(world, x + offset.x, y + offset.y, z + offset.z)) {
+					x += offset.x;
+					y += offset.y;
+					z += offset.z;
+					break;
+				}
+
 			if (playerFacing == 0)
 				directionMeta = 2;
 			if (playerFacing == 1)
@@ -46,6 +77,11 @@ public class EntityDeathInventoryHandler {
 			if (playerFacing == 3)
 				directionMeta = 4;
 			world.setBlock(x, y, z, ModBlocks.bones, directionMeta, 3);
+			playerProps.setDimension(player.worldObj.provider.getDimensionName());
+			playerProps.setXLocation(x);
+			playerProps.setZLocation(z);
+			NBTTagCompound playerData = new NBTTagCompound();
+			playerProps.saveNBTData(playerData);
 			TileEntityBones tile = Utils.getTileEntity(world, x, y, z, TileEntityBones.class);
 			if (tile != null) {
 				for (int i = 0; i < player.inventory.mainInventory.length; i++) {
@@ -85,6 +121,16 @@ public class EntityDeathInventoryHandler {
 				}
 				tile.setOwner("R.I.P. " + player.getCommandSenderName());
 			}
+		}
+	}
+
+	static class OffsetPos {
+		final int x, y, z;
+
+		OffsetPos(int x, int y, int z) {
+			this.x = x;
+			this.y = y;
+			this.z = z;
 		}
 	}
 }

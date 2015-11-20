@@ -30,7 +30,7 @@ public class RenderVelvetWorm extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		if (((EntityVelvetWorm) entity).skin == 0)
+		if (((EntityVelvetWorm) entity).getSkin() == 0)
 			return resource2;
 		else
 			return resource1;

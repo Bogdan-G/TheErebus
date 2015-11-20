@@ -1,9 +1,9 @@
 package erebus.network.client;
 
+import erebus.network.AbstractClientPacket;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.world.World;
-import erebus.network.AbstractClientPacket;
 
 public class PacketSound extends AbstractClientPacket {
 
@@ -33,10 +33,10 @@ public class PacketSound extends AbstractClientPacket {
 
 		switch (type) {
 			case SOUND_VELOCITY_USE:
-				s = "erebus:CentipedeSound";
+				s = "erebus:centipedesound";
 				break;
 			case SOUND_CAMO_USE:
-				s = "erebus:MantisSound";
+				s = "erebus:mantissound";
 				break;
 		}
 

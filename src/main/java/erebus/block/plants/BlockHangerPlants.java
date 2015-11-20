@@ -2,7 +2,12 @@ package erebus.block.plants;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
 import erebus.item.ItemErebusFood;
+import erebus.item.ItemMaterials.DATA;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -12,11 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.item.ItemMaterials.DATA;
 
 public class BlockHangerPlants extends BlockBush {
 
@@ -113,6 +113,10 @@ public class BlockHangerPlants extends BlockBush {
 		// Seeds
 		if (meta == dataHangerFruit && rand.nextInt(10) == 0)
 			world.setBlock(x, y, z, this, dataHangerSeed, 2);
+
+		// Revert Seeds
+		if (meta == dataHangerSeed && rand.nextInt(10) == 0)
+			world.setBlock(x, y, z, this, dataHanger4, 2);
 	}
 
 	@Override
@@ -157,7 +161,8 @@ public class BlockHangerPlants extends BlockBush {
 		int meta = world.getBlockMetadata(x, y, z);
 
 		if (meta == dataHangerFruit) {
-			ItemStack item = new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.darkFruit.ordinal());
+			ItemStack item = new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.DARK_FRUIT.ordinal());
+			world.playSoundAtEntity(player, "random.pop", 0.5F, 2.0F);
 			if (!player.inventory.addItemStackToInventory(item))
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 			world.setBlock(x, y, z, this, dataHanger4, 2);
@@ -180,7 +185,7 @@ public class BlockHangerPlants extends BlockBush {
 		int meta = world.getBlockMetadata(x, y, z);
 		ItemStack item = null;
 		if (meta == dataHangerFruit) {
-			item = new ItemStack(ModItems.food, 2, ItemErebusFood.FoodType.darkFruit.ordinal());
+			item = new ItemStack(ModItems.food, 2, ItemErebusFood.FoodType.DARK_FRUIT.ordinal());
 			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 		}
 
@@ -206,7 +211,7 @@ public class BlockHangerPlants extends BlockBush {
 		ItemStack item = null;
 		if (world.isAirBlock(x, y + 1, z)) {
 			if (meta == dataHangerFruit) {
-				item = new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.darkFruit.ordinal());
+				item = new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.DARK_FRUIT.ordinal());
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 			}
 			if (meta == dataHangerSeed) {

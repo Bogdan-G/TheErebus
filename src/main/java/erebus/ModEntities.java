@@ -5,6 +5,8 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import erebus.api.ErebusAPI;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
 import erebus.entity.EntityAnimatedChest;
@@ -17,11 +19,13 @@ import erebus.entity.EntityBlackAnt;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBloodSnail;
 import erebus.entity.EntityBombardierBeetle;
+import erebus.entity.EntityBombardierBeetleLarva;
 import erebus.entity.EntityBotFly;
 import erebus.entity.EntityBotFlyLarva;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityChameleonTick;
 import erebus.entity.EntityCicada;
+import erebus.entity.EntityCrushling;
 import erebus.entity.EntityCrushroom;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityExtractedBlock;
@@ -33,6 +37,7 @@ import erebus.entity.EntityGasVent;
 import erebus.entity.EntityGlowWorm;
 import erebus.entity.EntityGooBall;
 import erebus.entity.EntityGrasshopper;
+import erebus.entity.EntityHoneyPotAnt;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityLavaWebSpider;
 import erebus.entity.EntityLeech;
@@ -46,6 +51,7 @@ import erebus.entity.EntityMucusBombPrimed;
 import erebus.entity.EntityPoisonJet;
 import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
+import erebus.entity.EntityPreservedBlock;
 import erebus.entity.EntityPunchroom;
 import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
@@ -54,7 +60,6 @@ import erebus.entity.EntitySnapper;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntitySporeBall;
-import erebus.entity.EntityCrushling;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityTarantulaEgg;
@@ -75,6 +80,7 @@ import erebus.entity.EntityWorkerBee;
 import erebus.entity.EntityZombieAnt;
 import erebus.entity.effect.EntityErebusLightningBolt;
 import erebus.item.ItemSpawnEggs;
+import erebus.preserved.PreservableEntityRegistry.EntityDimensions;
 
 public class ModEntities {
 	public static void init() {
@@ -137,6 +143,8 @@ public class ModEntities {
 		registerEntity(55, EntityMucusBombPrimed.class, "mucusBombPrimed");
 		registerEntity(56, EntityUmberGolemDungeonTypes.class, "umberGolemIdol");
 		registerEntity(57, EntityAntlionBoss.class, "antlionBoss", 0x000000, 0xFFFFFF);
+		registerEntity(58, EntityHoneyPotAnt.class, "honeyPotAnt", 0xFFA400, 0x000000);
+		registerEntity(59, EntityBombardierBeetleLarva.class, "bombardierBeetleLarva", 0xFFEEFF, 0x9E0E0E);
 
 		registerEntity(70, EntityWaspDagger.class, "waspDagger");
 		registerEntity(71, EntityWebSling.class, "webSling");
@@ -149,17 +157,29 @@ public class ModEntities {
 		registerEntity(78, EntityPoisonJet.class, "poisonjet");
 		registerEntity(79, EntityGasVent.class, "gasVent");
 		registerEntity(80, EntityThrownSand.class, "thrownSand");
+		registerEntity(81, EntityPreservedBlock.class, "preservedBlock");
 
 		// Spawn conditions
-		EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 2, 5, EnumCreatureType.monster, BiomeGenBase.hell);
+		if (ConfigHandler.INSTANCE.netherWidows)
+			EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 2, 5, EnumCreatureType.monster, BiomeGenBase.hell);
 	}
 
 	private static final void registerEntity(int id, Class<? extends Entity> entityClass, String name) {
-		EntityRegistry.registerModEntity(entityClass, name, id, Erebus.instance, 256, 1, true);
+		registerEntity(id, entityClass, name, null);
+	}
+
+	private static final void registerEntity(int id, Class<? extends Entity> entityClass, String name, EntityDimensions dimensions) {
+		EntityRegistry.registerModEntity(entityClass, name, id, Erebus.instance, 256, 3, true);
+		if (dimensions != null)
+			ErebusAPI.preservableEntityRegistry.registerEntity(entityClass, dimensions);
 	}
 
 	private static final void registerEntity(int id, Class<? extends EntityLiving> entityClass, String name, int eggBackgroundColor, int eggForegroundColor) {
-		registerEntity(id, entityClass, name);
+		registerEntity(id, entityClass, name, eggBackgroundColor, eggForegroundColor, null);
+	}
+
+	private static final void registerEntity(int id, Class<? extends EntityLiving> entityClass, String name, int eggBackgroundColor, int eggForegroundColor, EntityDimensions dimensions) {
+		registerEntity(id, entityClass, name, dimensions);
 		ItemSpawnEggs.registerSpawnEgg(entityClass, name, id, eggBackgroundColor, eggForegroundColor);
 	}
 }

@@ -1,6 +1,9 @@
 package erebus.entity;
 
-import net.minecraft.entity.ai.EntityAITempt;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.entity.ai.EntityAIBlockFollowOwner;
+import erebus.tileentity.TileEntityAnimatedChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -9,9 +12,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.tileentity.TileEntityAnimatedChest;
 
 public class EntityAnimatedChest extends EntityAnimatedBlock {
 
@@ -26,7 +26,8 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 		tasks.removeTask(aiWander);
 		tasks.removeTask(aiAttackOnCollide);
 		tasks.removeTask(aiAttackNearestTarget);
-		tasks.addTask(1, new EntityAITempt(this, 1.0D, ModItems.wandOfAnimation, false));
+		tasks.addTask(1, new EntityAIBlockFollowOwner(this, 1.0D, 10.0F, 2.0F));
+		isImmuneToFire = true;
 	}
 
 	@Override
@@ -126,5 +127,9 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 			if (b0 >= 0 && b0 < inventory.length)
 				inventory[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
+	}
+
+	@Override
+	protected void fall(float distance) {
 	}
 }

@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import erebus.entity.ai.EntityErebusAIAttackOnCollide;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -11,8 +13,6 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ItemMaterials;
 
 public class EntitySolifuge extends EntityMob {
 
@@ -27,11 +27,6 @@ public class EntitySolifuge extends EntityMob {
 		tasks.addTask(3, new EntityAIWander(this, 0.3D));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-	}
-
-	@Override
-	protected void entityInit() {
-		super.entityInit();
 	}
 
 	@Override
@@ -91,12 +86,12 @@ public class EntitySolifuge extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ItemMaterials.DATA.bioVelocity.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.bioVelocity.makeStack(), 0.0F);
 	}
 
 	@Override
 	protected void dropRareDrop(int looting) {
-		entityDropItem(ItemMaterials.DATA.supernaturalvelocity.createStack(), 0.0F);
+		entityDropItem(ItemMaterials.DATA.supernaturalvelocity.makeStack(), 0.0F);
 	}
 
 	@Override
@@ -105,15 +100,11 @@ public class EntitySolifuge extends EntityMob {
 	}
 
 	@Override
-	public void onUpdate() {
-		super.onUpdate();
-	}
-
-	@Override
 	public void setDead() {
 		super.setDead();
-		if (!worldObj.isRemote)
-			for (int a = 0; a < 4; a++) {
+
+		if (!worldObj.isRemote && getHealth() <= 0.0F)
+			for (int i = 0; i < 4; i++) {
 				EntitySolifugeSmall entitySolifugeSmall = new EntitySolifugeSmall(worldObj);
 				entitySolifugeSmall.setPosition(posX + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D), posY + 1, posZ + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D));
 				entitySolifugeSmall.setPotionEffect(Byte.valueOf((byte) rand.nextInt(8)));

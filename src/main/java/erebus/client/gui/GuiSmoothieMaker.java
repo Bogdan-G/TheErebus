@@ -1,44 +1,51 @@
 package erebus.client.gui;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
+import java.awt.Rectangle;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import erebus.inventory.ContainerSmoothieMaker;
 import erebus.tileentity.TileEntitySmoothieMaker;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.FluidTank;
 
-public class GuiSmoothieMaker extends GuiContainer {
+@SideOnly(Side.CLIENT)
+public class GuiSmoothieMaker extends GuiErebus {
 
-	private TileEntitySmoothieMaker kitchen;
-	private static final ResourceLocation gui = new ResourceLocation("erebus:textures/gui/container/smoothieMaker.png");
+	private TileEntitySmoothieMaker tile;
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/gui/container/smoothieMaker.png");
+	public static final Rectangle[] tankPositions = new Rectangle[] { new Rectangle(8, 6, 9, 73), new Rectangle(25, 6, 9, 73), new Rectangle(142, 6, 9, 73), new Rectangle(159, 6, 9, 73) };
 
 	public GuiSmoothieMaker(InventoryPlayer inv, TileEntitySmoothieMaker tile) {
 		super(new ContainerSmoothieMaker(inv, tile));
-		kitchen = tile;
+		this.tile = tile;
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
+	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int mouseX, int mouseY) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(gui);
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
-		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+		mc.renderEngine.bindTexture(TEXTURE);
+		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-		int honey = kitchen.getScaledHoneyAmount(80);
-		drawTexturedModalRect(x + 8, y + 80 - honey, 8, 248 - honey, 9, honey);
-		int beetleJuice = kitchen.getScaledBeetleJuiceAmount(80);
-		drawTexturedModalRect(x + 25, y + 80 - beetleJuice, 25, 248 - beetleJuice, 9, beetleJuice);
-		int antiVenom = kitchen.getScaledAntiVenomAmount(80);
-		drawTexturedModalRect(x + 142, y + 80 - antiVenom, 142, 248 - antiVenom, 9, antiVenom);
-		int milk = kitchen.getScaledMilkAmount(80);
-		drawTexturedModalRect(x + 159, y + 80 - milk, 159, 248 - milk, 9, milk);
+		FluidTank[] tanks = tile.getTanks();
+		for (int i = 0; i < tankPositions.length; i++)
+			if (tanks[i].getFluidAmount() > 0) {
+				Rectangle rect = tankPositions[i];
+				drawFluid(tanks[i].getFluid(), (int) (rect.height * (float) tanks[i].getFluidAmount() / tanks[i].getCapacity()), rect.x + guiLeft, rect.y + guiTop, rect.width, rect.height);
+			}
 
-		if (kitchen.isBlending()) {
-			int i1 = kitchen.getBlendProgress();
-			drawTexturedModalRect(x + 52, y + 26, 176, 0, 73, i1 + 1);
+		mc.renderEngine.bindTexture(TEXTURE);
+		for (Rectangle rect : tankPositions)
+			drawTexturedModalRect(guiLeft + rect.x, guiTop + 3 + rect.y, 176, 41, rect.width, rect.height);
+
+		if (tile.isBlending()) {
+			float currentProgress = tile.getBlendProgress();
+			float prevProgress = tile.getPrevBlendProgress();
+			float progress = currentProgress + (currentProgress - prevProgress) * partialTickTime;
+			drawTexturedModalRectFloat(guiLeft + 52, guiTop + 26, 176, 0, 73, progress + 1);
 		}
 	}
 

@@ -1,10 +1,171 @@
-# Blocks
+##########
+# Blocks #
+##########
+
+# Logs
+tile.erebus.log_baobab.name=Baobab Wood
+tile.erebus.log_eucalyptus.name=Eucalyptus Wood
+tile.erebus.log_mahogany.name=Mahogany Wood
+tile.erebus.log_mossbark.name=Mossbark Wood
+tile.erebus.log_asper.name=Asper Wood
+tile.erebus.log_cypress.name=Cypress Wood
+tile.erebus.log_sap.name=Balsam Wood
+tile.erebus.log_rotten.name=Rotten Wood
+tile.erebus.log_marshwood.name=Marshwood Wood
+
+# Leaves
+tile.erebus.leaves_baobab.name=Baobab Leaves
+tile.erebus.leaves_eucalyptus.name=Eucalyptus Leaves
+tile.erebus.leaves_mahogany.name=Mahogany Leaves
+tile.erebus.leaves_mossbark.name=Mossbark Leaves
+tile.erebus.leaves_asper.name=Asper Leaves
+tile.erebus.leaves_cypress.name=Cypress Leaves
+tile.erebus.leaves_sap.name=Balsam Leaves
+tile.erebus.leaves_marshwood.name=Marshwood Leaves
+
+# Saplings
+tile.erebus.sapling_baobab.name=Baobab Sapling
+tile.erebus.sapling_eucalyptus.name=Eucalyptus Sapling
+tile.erebus.sapling_mahogany.name=Mahogany Sapling
+tile.erebus.sapling_mossbark.name=Mossbark Sapling
+tile.erebus.sapling_asper.name=Asper Sapling
+tile.erebus.sapling_cypress.name=Cypress Sapling
+tile.erebus.sapling_sap.name=Balsam Sapling
+tile.erebus.sapling_marshwood.name=Marshwood Sapling
+
+# Planks
+tile.erebus.planks_baobab.name=Baobab Planks
+tile.erebus.planks_eucalyptus.name=Eucalyptus Planks
+tile.erebus.planks_mahogany.name=Mahogany Planks
+tile.erebus.planks_mossbark.name=Mossbark Planks
+tile.erebus.planks_asper.name=Asper Planks
+tile.erebus.planks_cypress.name=Cypress Planks
+tile.erebus.planks_sap.name=Balsam Planks
+tile.erebus.planks_white.name=White Planks
+tile.erebus.planks_bamboo.name=Bamboo Planks
+tile.erebus.planks_rotten.name=Rotten Planks
+tile.erebus.planks_marshwood.name=Marshwood Planks
+
+# Stairs
+tile.erebus.stairs_baobab.name=Baobab Stairs
+tile.erebus.stairs_eucalyptus.name=Eucalyptus Stairs
+tile.erebus.stairs_mahogany.name=Mahogany Stairs
+tile.erebus.stairs_mossbark.name=Mossbark Stairs
+tile.erebus.stairs_asper.name=Asper Stairs
+tile.erebus.stairs_cypress.name=Cypress Stairs
+tile.erebus.stairs_sap.name=Balsam Stairs
+tile.erebus.stairs_white.name=White Stairs
+tile.erebus.stairs_bamboo.name=Bamboo Stairs
+tile.erebus.stairs_rotten.name=Rotten Stairs
+tile.erebus.stairs_marshwood.name=Marshwood Stairs
+
+# Slabs
+tile.erebus.slab_baobab.name=Baobab Slab
+tile.erebus.slab_eucalyptus.name=Eucalyptus Slab
+tile.erebus.slab_mahogany.name=Mahogany Slab
+tile.erebus.slab_mossbark.name=Mossbark Slab
+tile.erebus.slab_asper.name=Asper Slab
+tile.erebus.slab_cypress.name=Cypress Slab
+tile.erebus.slab_sap.name=Balsam Slab
+tile.erebus.slab_white.name=White Slab
+tile.erebus.slab_bamboo.name=Bamboo Slab
+tile.erebus.slab_rotten.name=Rotten Slab
+tile.erebus.slab_marshwood.name=Marshwood Slab
+
+tile.erebus.slab_umberstone.name=Umberstone Slab
+tile.erebus.slab_cobbleUmber.name=Umbercobble Slab
+tile.erebus.slab_cobbleUmberMossy.name=Mossy Umbercobble Slab
+tile.erebus.slab_cobbleUmberWebbed.name=Webbed Umbercobble Slab
+tile.erebus.slab_umberstoneBricks.name=Umberstone Bricks Slab
+tile.erebus.slab_umberpaver.name=Umberpaver Slab
+tile.erebus.slab_umberpaverMossy.name=Mossy Umberpaver Slab
+tile.erebus.slab_petrifiedWood.name=Petrified Wood Slab
+
+# Fences
+tile.erebus.fence_baobab.name=Baobab Fence
+tile.erebus.fence_eucalyptus.name=Eucalyptus Fence
+tile.erebus.fence_mahogany.name=Mahogany Fence
+tile.erebus.fence_mossbark.name=Mossbark Fence
+tile.erebus.fence_asper.name=Asper Fence
+tile.erebus.fence_cypress.name=Cypress Fence
+tile.erebus.fence_sap.name=Balsam Fence
+tile.erebus.fence_white.name=White Fence
+tile.erebus.fence_bamboo.name=Bamboo Fence
+tile.erebus.fence_rotten.name=Rotten Fence
+tile.erebus.fence_marshwood.name=Marshwood Fence
+
+# Fence Gates
+tile.erebus.fence_gate_baobab.name=Baobab Fence Gate
+tile.erebus.fence_gate_eucalyptus.name=Eucalyptus Fence Gate
+tile.erebus.fence_gate_mahogany.name=Mahogany Fence Gate
+tile.erebus.fence_gate_mossbark.name=Mossbark Fence Gate
+tile.erebus.fence_gate_asper.name=Asper Fence Gate
+tile.erebus.fence_gate_cypress.name=Cypress Fence Gate
+tile.erebus.fence_gate_sap.name=Balsam Fence Gate
+tile.erebus.fence_gate_white.name=White Fence Gate
+tile.erebus.fence_gate_bamboo.name=Bamboo Fence Gate
+tile.erebus.fence_gate_rotten.name=Rotten Fence Gate
+tile.erebus.fence_gate_marshwood.name=Marshwood Fence Gate
+
+# Flowers
+tile.erebus.flower_black_petal.name=Black Petal Block
+tile.erebus.flower_red_petal.name=Red Petal Block
+tile.erebus.flower_brown_petal.name=Brown Petal Block
+tile.erebus.flower_blue_petal.name=Blue Petal Block
+tile.erebus.flower_purple_petal.name=Purple Petal Block
+tile.erebus.flower_cyan_petal.name=Cyan Petal Block
+tile.erebus.flower_light_grey_petal.name=Light Gray Petal Block
+tile.erebus.flower_grey_petal.name=Gray Petal Block
+tile.erebus.flower_pink_petal.name=Pink Petal Block
+tile.erebus.flower_yellow_petal.name=Yellow Petal Block
+tile.erebus.flower_light_blue_petal.name=Light Blue Petal Block
+tile.erebus.flower_magenta_petal.name=Magenta Petal Block
+tile.erebus.flower_orange_petal.name=Orange Petal Block
+tile.erebus.flower_white_petal.name=White Petal Block
+tile.erebus.flower_exploding_stigma.name=Exploding Stigma
+tile.erebus.flower_stem.name=Stem
+
+tile.erebus.stigma_black.name=Black Stigma
+tile.erebus.stigma_red.name=Red Stigma
+tile.erebus.stigma_brown.name=Brown Stigma
+tile.erebus.stigma_blue.name=Blue Stigma
+tile.erebus.stigma_purple.name=Purple Stigma
+tile.erebus.stigma_cyan.name=Cyan Stigma
+tile.erebus.stigma_light_grey.name=Light Gray Stigma
+tile.erebus.stigma_grey.name=Gray Stigma
+tile.erebus.stigma_pink.name=Pink Stigma
+tile.erebus.stigma_yellow.name=Yellow Stigma
+tile.erebus.stigma_light_blue.name=Light Blue Stigma
+tile.erebus.stigma_magenta.name=Magenta Stigma
+tile.erebus.stigma_orange.name=Orange Stigma
+tile.erebus.stigma_white.name=White Stigma
+
+tile.erebus.flower_planted_black.name=Black Flower
+tile.erebus.flower_planted_red.name=Red Flower
+tile.erebus.flower_planted_brown.name=Brown Flower
+tile.erebus.flower_planted_blue.name=Blue Flower
+tile.erebus.flower_planted_purple.name=Purple Flower
+tile.erebus.flower_planted_cyan.name=Cyan Flower
+tile.erebus.flower_planted_light_grey.name=Light Gray Flower
+tile.erebus.flower_planted_grey.name=Gray Flower
+tile.erebus.flower_planted_pink.name=Pink Flower
+tile.erebus.flower_planted_yellow.name=Yellow Flower
+tile.erebus.flower_planted_light_blue.name=Light Blue Flower
+tile.erebus.flower_planted_magenta.name=Magenta Flower
+tile.erebus.flower_planted_orange.name=Orange Flower
+tile.erebus.flower_planted_white.name=White Flower
+
+# Fluid Blocks
+tile.erebus.honeyBlock.name=Honey
+
+# Rest (someone should organise it at some point)
 tile.erebus.portal.name=Erebus Portal
 tile.erebus.gaeanKeystone.name=Gaean Keystone
 
 tile.erebus.amber0.name=Amber
 tile.erebus.amber1.name=Amber Glass
 tile.erebus.amber2.name=Amber Bricks
+tile.erebus.preservedBlock.name=Preserved Block
 
 tile.erebus.dooramber.name=Amber Door
 tile.erebus.doorbaobab.name=Baobab Door
@@ -18,21 +179,11 @@ tile.erebus.doormossbark.name=Mossbark Door
 tile.erebus.doorrotten.name=Rotten Wood Door
 tile.erebus.doormarshwood.name=Marshwood Door
 
-tile.erebus.log.name=%s Wood
-tile.erebus.planks.name=%s Planks
-tile.erebus.stairPlanks.name=%s Stairs
-tile.erebus.leaves.name=%s Leaves
-tile.erebus.sapling.name=%s Sapling
-tile.erebus.slabPlanks.name=%s Slab
-tile.erebus.slabStone.name=%s Slab
-
 tile.erebus.log_scorched.name=Scorched Wood
 tile.erebus.planks_scorched.name=Scorched Planks
-tile.erebus.log_rotten.name=Rotten Wood
-tile.erebus.planks_rotten.name=Rotten Planks
 tile.erebus.log_hollow_acacia.name=Hollow Acacia Log
 tile.erebus.planks_varnished.name=Varnished Planks
-tile.erebus.saplessLog.name=Sapless log
+tile.erebus.saplessLog.name=Balsam resinless log
 
 tile.erebus.sundew.name=Sundew
 tile.erebus.weepingBlue.name=Weeping Blue Bell
@@ -56,12 +207,6 @@ tile.erebus.fireBloom.name=Firebloom
 tile.erebus.fern.name=Fern
 tile.erebus.fiddlehead.name=Fiddlehead
 tile.erebus.algae.name=Swamp Algae
-
-tile.erebus.flowerPlanted.name=%s Flower
-tile.erebus.stigma.name=%s Flower Stigma
-tile.erebus.flower.name=%s Petal
-tile.erebus.flower_14.name=Exploding Stigma
-tile.erebus.flower_15.name=Stem
 
 tile.erebus.jadeBerryBush.name=Jadeberry Bush
 tile.erebus.heartBerryBush.name=Heartberry Bush
@@ -167,6 +312,7 @@ tile.erebus.waspSpawner.name=Wasp Spawner
 tile.erebus.tarantulaSpawner.name=Tarantula Spawner
 tile.erebus.antlionSpawner.name=Antlion Spawner
 tile.erebus.magmaCrawlerSpawner.name=Magma Crawler Spawner
+tile.erebus.dragonflySpawner.name=Dragonfly Spawner
 
 tile.erebus.waspNestBlock.name=Wasp Nest Block
 tile.erebus.blockSpiderSilk.name=Silk
@@ -200,9 +346,38 @@ tile.erebus.glowshroomStalk.name=Glowshroom Stalk
 
 tile.erebus.wallPlants_0.name=Moss
 tile.erebus.wallPlants_1.name=Mould
+tile.erebus.wallPlants_2.name=Moss
+tile.erebus.wallPlants_3.name=Moss
+tile.erebus.wallPlants_4.name=Moss
+tile.erebus.wallPlants_5.name=Moss
+tile.erebus.wallPlants_6.name=Moss
+tile.erebus.wallPlants_7.name=Moss
+tile.erebus.wallPlants_8.name=Mould
+tile.erebus.wallPlants_9.name=Mould
+tile.erebus.wallPlants_10.name=Mould
+tile.erebus.wallPlants_11.name=Mould
+tile.erebus.wallPlants_12.name=Mould
+tile.erebus.wallPlants_13.name=Mould
+
+tile.erebus.wallPlantsCultivated_0.name=Cultivated Moss
+tile.erebus.wallPlantsCultivated_1.name=Cultivated Mould
+tile.erebus.wallPlantsCultivated_2.name=Cultivated Moss
+tile.erebus.wallPlantsCultivated_3.name=Cultivated Moss
+tile.erebus.wallPlantsCultivated_4.name=Cultivated Moss
+tile.erebus.wallPlantsCultivated_5.name=Cultivated Moss
+tile.erebus.wallPlantsCultivated_6.name=Cultivated Moss
+tile.erebus.wallPlantsCultivated_7.name=Cultivated Moss
+tile.erebus.wallPlantsCultivated_8.name=Cultivated Mould
+tile.erebus.wallPlantsCultivated_9.name=Cultivated Mould
+tile.erebus.wallPlantsCultivated_10.name=Cultivated Mould
+tile.erebus.wallPlantsCultivated_11.name=Cultivated Mould
+tile.erebus.wallPlantsCultivated_12.name=Cultivated Mould
+tile.erebus.wallPlantsCultivated_13.name=Cultivated Mould
+
 tile.erebus.hanger.name=Erebus Hanger
 tile.erebus.turnipsCrop.name=Turnips
 tile.erebus.cabbageCrop.name=Cabbage
+tile.erebus.giantLilyPad.name=Giant Lily Pad
 
 tile.erebus.siloTank.name=Silo Tank
 tile.erebus.siloRoof.name=Silo Roof
@@ -229,9 +404,43 @@ tile.erebus.blockSilk.name=Silk
 
 tile.erebus.smoothieMaker.name=ErebusCo. Smoothie-matic 2000
 
-tile.erebus.armchair.name=Adventurer's Armchair
+#########
+# Items #
+#########
 
-# Items
+# Smoothies
+item.erebus.smoothie_green_tea_grasshopper.name=Green Tea Grasshopper Smoothie
+item.erebus.smoothie_money_honey.name=Money Honey Smoothie
+item.erebus.smoothie_nothing_in_the_middle.name=Nothing In The Middle Smoothie
+item.erebus.smoothie_green_giant.name=Green Giant Smoothie
+item.erebus.smoothie_seedy_goodness.name=Seedy Goodness Smoothie
+item.erebus.smoothie_givin_me_the_blues.name=Givin' Me The Blues Smoothie
+item.erebus.smoothie_hot_hot_baby.name=Hot Hot Baby Smoothie
+item.erebus.smoothie_dont_meddle_with_the_nettle.name=Don't Meddle With The Nettle Smoothie
+item.erebus.smoothie_liquid_gold.name=Liquid Gold Smoothie
+item.erebus.smoothie_bryufs_brew.name=Bryuf's Brew Smoothie
+
+# Foodstuffs
+item.erebus.food_beetle_larva_raw.name=Beetle Larva
+item.erebus.food_beetle_larva_cooked.name=Cooked Beetle Larva
+item.erebus.food_grasshopper_leg_raw.name=Grasshopper Leg
+item.erebus.food_grasshopper_leg_cooked.name=Cooked Grasshopper Leg
+item.erebus.food_tarantula_leg_raw.name=Tarantula Leg
+item.erebus.food_tarantula_leg_cooked.name=Crispy Tarantula Leg
+item.erebus.food_bamboo_soup.name=Bamboo Soup
+item.erebus.food_melonade.name=Melonade
+item.erebus.food_melonade_sparkly.name=Sparkly Melonade
+item.erebus.food_larvae_on_stick.name=Larvae-on-a-Stick
+item.erebus.food_honey_sandwich.name=Honey Sandwich
+item.erebus.food_dark_fruit.name=Dark Fruit
+item.erebus.food_titan_chop_raw.name=Raw Titan Chop
+item.erebus.food_titan_chop_cooked.name=Cooked Titan Chop
+item.erebus.food_swampberries.name=Swampberries
+item.erebus.food_cabbage.name=Cabbage
+item.erebus.food_titan_stew_cooked.name=Cooked Titan Stew
+
+# Rest
+item.erebus.wand_of_preservation.name=Wand of Preservation
 item.erebus.encrustedDiamond.name=Encrusted Diamond
 item.erebus.helmetExo.name=Exoskeleton Helmet
 item.erebus.chestplateExo.name=Exoskeleton Chestplate
@@ -313,8 +522,8 @@ item.erebus.materials.rhinoBeetleHorn.name=Rhino Beetle Horn
 item.erebus.materials.antPheromones.name=Ant Pheromones
 item.erebus.materials.gaeanGem.name=Gaean Gem
 item.erebus.materials.crimsonHeart.name=Crimson Heart
-item.erebus.materials.sapBall.name=Tree Sap Ball
-item.erebus.materials.UNUSED.name=UNUSED
+item.erebus.materials.sapBall.name=Tree Resin
+item.erebus.materials.amberStar.name=Amber Star
 item.erebus.materials.ingotAluminium.name=Aluminium Ingot
 item.erebus.materials.ingotCopper.name=Copper Ingot
 item.erebus.materials.ingotLead.name=Lead Ingot
@@ -337,37 +546,6 @@ item.erebus.materials.magmaCrawlerEye.name=Magma Crawler Eye
 item.erebus.materials.stewPot.name=Stew Pot
 item.erebus.materials.titanStew.name=Un-cooked Titan Stew
 
-item.erebus.food.0.name=Beetle Larva
-item.erebus.food.1.name=Cooked Beetle Larva
-item.erebus.food.2.name=Grasshopper Leg
-item.erebus.food.3.name=Cooked Grasshopper Leg
-item.erebus.food.4.name=Tarantula Paw
-item.erebus.food.5.name=Crispy Tarantula Paw
-item.erebus.food.6.name=Bamboo Soup
-item.erebus.food.7.name=Melonade
-item.erebus.food.8.name=Sparkly Melonade
-item.erebus.food.9.name=Larvae-on-a-Stick
-item.erebus.food.10.name=Honey Sandwich
-item.erebus.food.11.name=Dark Fruit
-item.erebus.food.12.name=Raw Titan Chop
-item.erebus.food.13.name=Cooked Titan Chop
-item.erebus.food.14.name=Swampberries
-item.erebus.food.15.name=Cabbage
-item.erebus.food.16.name=Cooked Titan Stew
-
-item.erebus.smoothie.0.name=Green Tea Grasshopper
-item.erebus.smoothie.1.name=Money Honey
-item.erebus.smoothie.2.name=Nothing In The Middle
-item.erebus.smoothie.3.name=Green Giant
-item.erebus.smoothie.4.name=Seedy Goodness
-item.erebus.smoothie.5.name=Givin' Me The Blues
-item.erebus.smoothie.6.name=Hot Hot Baby
-item.erebus.smoothie.7.name=Don't Meddle With The Nettle
-item.erebus.smoothie.8.name=Liquid Gold
-item.erebus.smoothie.9.name=Bryuf's Brew
-
-item.erebus.smoothieBook.name=Smoothie-matic 2000
-
 item.erebus.heartBerries.name=Heartberries
 item.erebus.lifeBlood.name=Life Blood
 
@@ -385,6 +563,7 @@ item.erebus.bambucketWater.name=Water Bambucket
 item.erebus.bambucketHoney.name=Honey Bambucket
 item.erebus.bambucketAntiVenom.name=Anti-Venom Bambucket
 item.erebus.bambucketBeetleJuice.name=Beetle Juice Bambucket
+item.erebus.bambucketMilk.name=Milk Bambucket
 item.erebus.bucketBeetleJuice.name=Beetle Juice Bucket
 item.erebus.bucketAntiVenom.name=Anti-Venom Bucket
 item.erebus.bottleAntiVenom.name=Anti-Venom Bottle
@@ -404,7 +583,7 @@ item.erebus.doorAmberitem.erebus.name=Amber Door
 item.erebus.bucketHoney.name=Bucket Of Honey
 item.erebus.homingBeecon.name=Homing Beecon
 item.erebus.homingBeeconAdvanced.name=Advanced Homing Beecon
-item.erebus.flowerSeeds.name=%s Flower Bulb
+item.erebus.deathCompass.name=Block o' Bones Compass
 item.erebus.whetstone.name=Whetstone
 item.erebus.woodlouseBall.name=Woodlouse Ball
 item.erebus.rolledNewspaper.name=Rolled Up Newspaper
@@ -414,10 +593,29 @@ item.erebus.compost.name=Compost
 item.erebus.monsterPlacer.name=Spawn %s
 item.doorAmberItem.name=Amber Door
 item.erebus.warHammer.name=Quake Hammer
-
 item.erebus.soulCrystal.name=Soul Crystal
 
-# Entities
+# Flower Bulbs
+item.erebus.flower_bulb_black.name=Black Flower Bulb
+item.erebus.flower_bulb_red.name=Red Flower Bulb
+item.erebus.flower_bulb_brown.name=Brown Flower Bulb
+item.erebus.flower_bulb_blue.name=Blue Flower Bulb
+item.erebus.flower_bulb_purple.name=Purple Flower Bulb
+item.erebus.flower_bulb_cyan.name=Cyan Flower Bulb
+item.erebus.flower_bulb_light_grey.name=Light Gray Flower Bulb
+item.erebus.flower_bulb_grey.name=Gray Flower Bulb
+item.erebus.flower_bulb_pink.name=Pink Flower Bulb
+item.erebus.flower_bulb_yellow.name=Yellow Flower Bulb
+item.erebus.flower_bulb_light_blue.name=Light Blue Flower Bulb
+item.erebus.flower_bulb_magenta.name=Magenta Flower Bulb
+item.erebus.flower_bulb_orange.name=Orange Flower Bulb
+item.erebus.flower_bulb_white.name=White Flower Bulb
+item.erebus.flower_bulb_rainbow.name=Rainbow Flower Bulb
+
+############
+# Entities #
+############
+
 entity.erebus.beetleLarva.name=Beetle Larva
 entity.erebus.wasp.name=Wasp
 entity.erebus.centipede.name=Centipede
@@ -452,7 +650,7 @@ entity.erebus.woodlouse.name=Woodlouse
 entity.erebus.cicada.name=Cicada
 entity.erebus.fireAntSoldier.name=Fire Ant Soldier
 entity.erebus.lavaWebSpider.name=Lava Web Spider
-entity.erebus.antlionMiniBoss.name=Antlion Mini Boss
+entity.erebus.antlionMiniBoss.name=Antlion Trove Guardian
 entity.erebus.chameleonTick.name=Chameleon Tick
 entity.erebus.solifugeSmall.name=Solifuge Small
 entity.erebus.midgeSwarm.name=Midge Swarm
@@ -470,20 +668,34 @@ entity.erebus.magmaCrawler.name=Magma Crawler
 entity.erebus.umberGolemIdol.name=Umber Golem Idol Guardian
 entity.erebus.antlionBoss.name=Antlion Overlord
 entity.erebus.bombardierBeetle.name=Bombardier Beetle
+entity.erebus.animatedChest.name=Chester
+entity.erebus.animatedBambooCrate.name=Bamber
+entity.erebus.animatedBlock.name=Animated Block
+entity.erebus.honeyPotAnt.name=Honey Pot Ant
+entity.erebus.bombardierBeetleLarva.name=Bombardier Beetle Larva
 
-# Fluids
+##########
+# Fluids #
+##########
+
 fluid.honey=Honey
 fluid.beetleJuice=Beetle Juice
 fluid.antiVenom=Anti-Venom
 
-# Others
+#################
+# Creative Tabs #
+#################
+
 itemGroup.erebus.block=Erebus Blocks
 itemGroup.erebus.item=Erebus Items
 itemGroup.erebus.gear=Erebus Gear
 itemGroup.erebus.special=Erebus Specials
 itemGroup.erebus.plants=Erebus Plants
 
-# Achievements
+################
+# Achievements #
+################
+
 achievement.welcome=A secret below the world
 achievement.welcome.desc=enter the Erebus
 achievement.beetle=They used to be called Maggots
@@ -497,7 +709,10 @@ achievement.umberstone.desc=Mine Umberstone
 achievement.tshirt=Oh come on!
 achievement.tshirt.desc=I killed a boss and all I got was this lousy t-shirt
 
-# Containers
+##############
+# Containers #
+##############
+
 container.bambooCrate=Bamboo Crate
 container.colossalCrate=Bamboo Crate
 container.umberFurnace=Umber Furnace
@@ -508,38 +723,57 @@ container.antInventory=Ant Command Control
 container.composter=Organic Composter
 container.bamber=Bamber
 
-# Colours
-colour.erebus.dyeBlack=Black
-colour.erebus.dyeRed=Red
-colour.erebus.dyeGreen=Green
-colour.erebus.dyeBrown=Brown
-colour.erebus.dyeBlue=Blue
-colour.erebus.dyePurple=Purple
-colour.erebus.dyeCyan=Cyan
-colour.erebus.dyeLightGray=Light Grey
-colour.erebus.dyeGray=Grey
-colour.erebus.dyePink=Pink
-colour.erebus.dyeLime=Lime
-colour.erebus.dyeYellow=Yellow
-colour.erebus.dyeLightBlue=Light Blue
-colour.erebus.dyeMagenta=Magenta
-colour.erebus.dyeOrange=Orange
-colour.erebus.dyeWhite=White
-colour.erebus.rainbow=Rainbow
+############
+# Tooltips #
+############
 
-# Woods
-wood.erebus.baobab=Baobab
-wood.erebus.eucalyptus=Eucalyptus
-wood.erebus.mahogany=Mahogany
-wood.erebus.mossbark=Mossbark
-wood.erebus.asper=Asper
-wood.erebus.cypress=Cypress
-wood.erebus.sap=Sap
-wood.erebus.white=White
-wood.erebus.bamboo=Bamboo
-wood.erebus.rotten=Rotten
-wood.erebus.marshwood=Marshwood
+tooltip.erebus.dimension=Dimension: %s
+tooltip.erebus.targetx=Target X: %d
+tooltip.erebus.targety=Target Y: %d
+tooltip.erebus.targetz=Target Z: %d
+tooltip.erebus.homingbeeconadvanced_1=Sneak + Right click on a block to set as target.
+tooltip.erebus.homingbeeconadvanced_2=Right click to teleport.
+tooltip.erebus.homingbeecon=Sneak + Click on a block to set as target.
+tooltip.erebus.deathcompass=Given to Player after death to find Block o' Bones.
+tooltip.erebus.warhammer_1=Hold Right mouse button to charge up.
+tooltip.erebus.warhammer_2=Sneak + Right Click on top of block to use A.O.E. attack.
+tooltip.erebus.waspdagger_1=One use.
+tooltip.erebus.waspdagger_2=Can be thrown.
+tooltip.erebus.honeycombx=Honey Comb Block X: %d
+tooltip.erebus.honeycomby=Honey Comb Block Y: %d
+tooltip.erebus.honeycombz=Honey Comb Block Z: %d
+tooltip.erebus.beetamingamulet_1=Click on a Honey Comb Block to set as target for Bee drops.
+tooltip.erebus.beetamingamulet_2=Then click on Bee to tame.
+tooltip.erebus.siloblockx=Silo Block X: %d
+tooltip.erebus.siloblocky=Silo Block Y: %d
+tooltip.erebus.siloblockz=Silo Block Z: %d
+tooltip.erebus.anttamingamulet_1=Click on a Silo Block to set as target for Ants.
+tooltip.erebus.anttamingamulet_2=Then click on Ant to link it.
+tooltip.erebus.sprintleggingstier=Tier %d
+tooltip.erebus.whetstonesharpness=Sharpness Level %d
+tooltip.erebus.whetstone_1=Apply to tools using an Anvil.
+tooltip.erebus.whetstone_2=Un-enchanted
+tooltip.erebus.whetstone_3=Surround with Whetstone Powder to increase levels.
+tooltip.erebus.nectarcollector=Right click Bees to collect nectar.
+tooltip.erebus.wandofanimation=Right click blocks to animate them.
+tooltip.erebus.extractor=Point at blocks and hold down the right mouse button to extract them.
+tooltip.erebus.scorpionpincer=Can Shoot Fire Charges if in your Inventory.
 
-# Random
-armchair.spawnSet=You can only sit here...oh whenever
-armchair.spawnUnset=Spawn location removed
+############
+# Commands #
+############
+command.erebus.commanddenied=Cannot use Erebus debug commands in console or command block.
+command.erebus.available=Available commands:
+command.erebus.generated=Generated.
+command.erebus.failed=Failed.
+command.erebus.somethingwentwrong=Something went wrong.
+command.erebus.gen=/erebus gen <type> <feature>
+
+##########
+# Others #
+##########
+
+erebus.smoothie.effect.milk=Clears Effects
+erebus.smoothie.effect.extinguish=Puts Out Fires
+erebus.smoothie.effect.set_fire=Makes Fire
+erebus.smoothie.effect.heal=Heals

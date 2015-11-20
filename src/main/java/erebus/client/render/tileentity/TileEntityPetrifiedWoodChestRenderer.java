@@ -1,12 +1,5 @@
 package erebus.client.render.tileentity;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.model.ModelChest;
-import net.minecraft.client.model.ModelLargeChest;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -15,6 +8,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.block.BlockPetrifiedChest;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
+import net.minecraft.block.Block;
+import net.minecraft.client.model.ModelChest;
+import net.minecraft.client.model.ModelLargeChest;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityPetrifiedWoodChestRenderer extends TileEntitySpecialRenderer {
@@ -25,7 +24,7 @@ public class TileEntityPetrifiedWoodChestRenderer extends TileEntitySpecialRende
 	private final ModelChest chestModel = new ModelChest();
 	private final ModelChest largeChestModel = new ModelLargeChest();
 
-	public void renderTileEntityPetrifiedWoodChestAt(TileEntityPetrifiedWoodChest chest, double x, double y, double z, float yaw) {
+	public void renderTileEntityPetrifiedWoodChestAt(TileEntityPetrifiedWoodChest chest, double x, double y, double z, float partialTickTime) {
 		int i;
 
 		if (!chest.hasWorldObj())
@@ -85,18 +84,18 @@ public class TileEntityPetrifiedWoodChestRenderer extends TileEntitySpecialRende
 
 			GL11.glRotatef(short1, 0.0F, 1.0F, 0.0F);
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-			float f1 = chest.prevLidAngle + (chest.lidAngle - chest.prevLidAngle) * yaw;
+			float f1 = chest.prevLidAngle + (chest.lidAngle - chest.prevLidAngle) * partialTickTime;
 			float f2;
 
 			if (chest.adjacentChestZNeg != null) {
-				f2 = chest.adjacentChestZNeg.prevLidAngle + (chest.adjacentChestZNeg.lidAngle - chest.adjacentChestZNeg.prevLidAngle) * yaw;
+				f2 = chest.adjacentChestZNeg.prevLidAngle + (chest.adjacentChestZNeg.lidAngle - chest.adjacentChestZNeg.prevLidAngle) * partialTickTime;
 
 				if (f2 > f1)
 					f1 = f2;
 			}
 
 			if (chest.adjacentChestXNeg != null) {
-				f2 = chest.adjacentChestXNeg.prevLidAngle + (chest.adjacentChestXNeg.lidAngle - chest.adjacentChestXNeg.prevLidAngle) * yaw;
+				f2 = chest.adjacentChestXNeg.prevLidAngle + (chest.adjacentChestXNeg.lidAngle - chest.adjacentChestXNeg.prevLidAngle) * partialTickTime;
 
 				if (f2 > f1)
 					f1 = f2;

@@ -1,10 +1,10 @@
 package erebus.entity.ai;
 
+import erebus.ModBlocks;
+import erebus.entity.EntityWorkerBee;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ChunkCoordinates;
-import erebus.ModBlocks;
-import erebus.entity.EntityWorkerBee;
 
 public class EntityAIPolinate extends EntityAIFindFlower {
 
@@ -55,7 +55,7 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 	protected void afterPollination() {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
 		if (bee.getNectarPoints() < 127)
-			bee.setNectarPoints(bee.getNectarPoints() + 1);
+			bee.setNectarPoints(bee.getNectarPoints() + 2);
 		if (bee.getTameState() == 0) {
 			bee.setBeePollinating(false);
 			bee.setBeeFlying(true);

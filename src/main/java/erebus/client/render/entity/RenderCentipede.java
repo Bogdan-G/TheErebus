@@ -21,7 +21,7 @@ public class RenderCentipede extends RenderLiving {
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		EntityCentipede entityCentipede = (EntityCentipede) entity;
-		switch (entityCentipede.skin) {
+		switch (entityCentipede.getSkin()) {
 			case 0:
 				return resource1;
 			case 1:

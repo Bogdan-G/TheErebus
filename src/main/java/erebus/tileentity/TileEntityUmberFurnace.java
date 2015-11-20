@@ -1,5 +1,9 @@
 package erebus.tileentity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.block.BlockUmberFurnace;
+import erebus.inventory.ContainerUmberFurnace;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -14,10 +18,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.block.BlockUmberFurnace;
-import erebus.inventory.ContainerUmberFurnace;
 
 public class TileEntityUmberFurnace extends TileEntityBasicInventory implements IFluidHandler {
 
@@ -31,7 +31,7 @@ public class TileEntityUmberFurnace extends TileEntityBasicInventory implements 
 	private int cookTime = 200;
 	private int furnaceBurnTime;
 	private int currentItemBurnTime;
-	private int furnaceCookTime;
+	private int furnaceCookTime, prevFurnaceCookTime;
 
 	public TileEntityUmberFurnace() {
 		super(4, "container.umberFurnace");
@@ -52,8 +52,11 @@ public class TileEntityUmberFurnace extends TileEntityBasicInventory implements 
 
 	@Override
 	public void updateEntity() {
-		if (worldObj.isRemote)
+		if (worldObj.isRemote) {
+			// Interpolation stuff
+			prevFurnaceCookTime = furnaceCookTime;
 			return;
+		}
 
 		// Draining buckets
 		inventory[BUCKET_SLOT] = fillTankWithBucket(inventory[BUCKET_SLOT]);
@@ -187,7 +190,7 @@ public class TileEntityUmberFurnace extends TileEntityBasicInventory implements 
 		return new FluidTankInfo[] { tank.getInfo() };
 	}
 
-	public int getScaledFluidAmount(int scale) {
+	public int getScaledFluidAmount(float scale) {
 		return tank.getFluid() != null ? (int) ((float) tank.getFluid().amount / (float) tank.getCapacity() * scale) : 0;
 	}
 
@@ -227,16 +230,21 @@ public class TileEntityUmberFurnace extends TileEntityBasicInventory implements 
 	}
 
 	@SideOnly(Side.CLIENT)
-	public int getBurnTimeRemainingScaled(int scale) {
+	public float getBurnTimeRemainingScaled(int scale) {
 		if (currentItemBurnTime == 0)
 			currentItemBurnTime = cookTime;
 
-		return furnaceBurnTime * scale / currentItemBurnTime;
+		return furnaceBurnTime * scale / (float) currentItemBurnTime;
 	}
 
 	@SideOnly(Side.CLIENT)
-	public int getCookProgressScaled(int scale) {
-		return furnaceCookTime * scale / cookTime;
+	public float getCookProgressScaled(int scale) {
+		return furnaceCookTime * scale / (float) cookTime;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public float getPrevCookProgressScaled(int scale) {
+		return prevFurnaceCookTime * scale / (float) cookTime;
 	}
 
 	@Override

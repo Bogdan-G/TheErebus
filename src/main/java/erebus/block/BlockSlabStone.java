@@ -3,6 +3,12 @@ package erebus.block;
 import java.util.ArrayList;
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
+import erebus.item.block.ItemBlockSlabSimple;
+import erebus.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -13,22 +19,19 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.ISubBlocksBlock;
-import erebus.ModTabs;
-import erebus.item.block.ItemBlockSlabSimple;
-import erebus.lib.Reference;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockSlabStone extends Block implements ISubBlocksBlock {
 
+	private final String baseName;
 	public final Block base;
 	public final int meta;
 
-	public BlockSlabStone(Block base, int meta) {
+	public BlockSlabStone(Block base, int meta, String baseName) {
 		super(base.getMaterial());
 		this.base = base;
 		this.meta = meta;
+		this.baseName = baseName;
 		setHardness(2.0F);
 		setLightOpacity(0);
 		setCreativeTab(ModTabs.blocks);
@@ -43,8 +46,14 @@ public class BlockSlabStone extends Block implements ISubBlocksBlock {
 		setBlockName(Reference.MOD_ID + ".slab-" + name + meta);
 	}
 
-	public BlockSlabStone(Block base) {
-		this(base, 0);
+	public BlockSlabStone(Block base, String baseName) {
+		this(base, 0, baseName);
+	}
+
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		int meta = world.getBlockMetadata(x, y, z);
+		return meta == 2 || side == ForgeDirection.UP && meta == 1 || side == ForgeDirection.DOWN && meta == 0;
 	}
 
 	@Override
@@ -94,7 +103,7 @@ public class BlockSlabStone extends Block implements ISubBlocksBlock {
 
 	@Override
 	public String getLocalizedName() {
-		return String.format(StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".slabStone.name"), new ItemStack(base, 1, meta).getDisplayName());
+		return StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".slab_" + baseName + ".name");
 	}
 
 	@Override

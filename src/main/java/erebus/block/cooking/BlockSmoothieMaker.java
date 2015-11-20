@@ -1,5 +1,13 @@
 package erebus.block.cooking;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModBlocks;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.tileentity.TileEntitySmoothieMaker;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -10,14 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModBlocks;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.tileentity.TileEntitySmoothieMaker;
 
 public class BlockSmoothieMaker extends BlockContainer {
 
@@ -52,16 +52,26 @@ public class BlockSmoothieMaker extends BlockContainer {
 
 		if (player.getCurrentEquippedItem() != null) {
 			ItemStack oldItem = player.getCurrentEquippedItem();
-			ItemStack newItem = tile.fillTankWithBucket(player.inventory.getStackInSlot(player.inventory.currentItem));
+			ItemStack newItem = tile.fillTankWithBucket(oldItem);
 
-			if (!player.capabilities.isCreativeMode)
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, newItem);
-			if (!ItemStack.areItemStacksEqual(oldItem, newItem))
+			if (!ItemStack.areItemStacksEqual(oldItem, newItem)) {
+				if (!player.capabilities.isCreativeMode)
+					if (oldItem.stackSize > 1) {
+						oldItem.stackSize--;
+						if (!player.inventory.addItemStackToInventory(newItem))
+							player.dropPlayerItemWithRandomChoice(newItem, false);
+						else
+							player.inventory.markDirty();
+					} else {
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, newItem);
+						player.inventory.markDirty();
+					}
 				return true;
+			}
 		}
 
 		if (tile != null)
-			player.openGui(Erebus.instance, CommonProxy.GUI_ID_SMOOTHIE_MAKER, world, x, y, z);
+			player.openGui(Erebus.instance, CommonProxy.GuiID.SMOOTHIE_MAKER.ordinal(), world, x, y, z);
 
 		return true;
 	}

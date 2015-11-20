@@ -8,18 +8,14 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.item.ItemMaterials;
 
 public class EntityTarantulaBaby extends EntityMob {
-	public int skin = rand.nextInt(99);
 
 	public EntityTarantulaBaby(World world) {
 		super(world);
@@ -30,12 +26,13 @@ public class EntityTarantulaBaby extends EntityMob {
 	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(16, new Byte((byte) 0));
+		dataWatcher.addObject(30, new Integer(rand.nextInt(2)));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.9D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
 	}
@@ -150,32 +147,6 @@ public class EntityTarantulaBaby extends EntityMob {
 	}
 
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		int chanceFiftyFifty = rand.nextInt(1) + 1;
-		int chance20x60x20 = rand.nextInt(4);
-		int legDrop = 0;
-		switch (chance20x60x20) {
-			case 0:
-				legDrop = 1;
-				break;
-			case 1:
-			case 2:
-			case 3:
-				legDrop = 2;
-				break;
-			case 4:
-				legDrop = 3;
-				break;
-		}
-		if (isBurning())
-			entityDropItem(new ItemStack(ModItems.food, legDrop + looting, 5), 0.0F);
-		else
-			entityDropItem(new ItemStack(ModItems.food, legDrop + looting, 4), 0.0F);
-		dropItem(Items.spider_eye, chanceFiftyFifty + looting);
-		entityDropItem(ItemMaterials.DATA.poisonGland.createStack(1 + rand.nextInt(2)), 0.0F);
-	}
-
-	@Override
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData entityLivingData) {
 		Object entityLivingData1 = super.onSpawnWithEgg(entityLivingData);
 
@@ -198,5 +169,28 @@ public class EntityTarantulaBaby extends EntityMob {
 			}
 		}
 		return (IEntityLivingData) entityLivingData1;
+	}
+
+	public void setSkin(int skinType) {
+		dataWatcher.updateObject(30, new Integer(skinType));
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger("skin", getSkin());
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		if (nbt.hasKey("skin"))
+			setSkin(nbt.getInteger("skin"));
+		else
+			setSkin(rand.nextInt(2));
+	}
+
+	public int getSkin() {
+		return dataWatcher.getWatchableObjectInt(30);
 	}
 }

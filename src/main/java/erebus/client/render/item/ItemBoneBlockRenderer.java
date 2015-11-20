@@ -1,16 +1,15 @@
 package erebus.client.render.item;
 
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.block.ModelBoneBlock;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
 
 @SideOnly(Side.CLIENT)
 public class ItemBoneBlockRenderer implements IItemRenderer {
@@ -51,7 +50,7 @@ public class ItemBoneBlockRenderer implements IItemRenderer {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/boneBlock.png"));
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x, y - 1.5F, z + 1.5F);
+			GL11.glTranslatef(x, y - 0.25F, z + 1.5F);
 			GL11.glRotatef(-90F, 1F, 0, 0);
 			GL11.glScaled(1F, 1F, 1F);
 			ModelBoneBlock.render();

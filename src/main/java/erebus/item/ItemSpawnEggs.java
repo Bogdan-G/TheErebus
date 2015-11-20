@@ -1,5 +1,10 @@
 package erebus.item;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.lib.Reference;
@@ -8,6 +13,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMonsterPlacer;
@@ -19,11 +25,9 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 public class ItemSpawnEggs extends ItemMonsterPlacer {
+
+	private static final Random rand = new Random();
 	private static final Map<Short, EggData> eggTypes = new LinkedHashMap<Short, EggData>();
 
 	public ItemSpawnEggs() {
@@ -31,12 +35,22 @@ public class ItemSpawnEggs extends ItemMonsterPlacer {
 		setCreativeTab(CreativeTabs.tabMisc);
 	}
 
-	public static final void registerSpawnEgg(Class<? extends EntityLiving> entity, String entityName, int id, int eggBackgroundColor, int eggForegroundColor) {
+	public static void registerSpawnEgg(Class<? extends EntityLiving> entity, String entityName, int id, int eggBackgroundColor, int eggForegroundColor) {
 		eggTypes.put((short) id, new EggData(id, entityName, entity, eggBackgroundColor, eggForegroundColor));
 	}
 
-	private static final EggData getEggData(ItemStack is) {
+	private static EggData getEggData(ItemStack is) {
 		return eggTypes.get((short) is.getItemDamage());
+	}
+
+	public static Class<? extends EntityLiving> getRandomEntityClass() {
+		EggData[] eggs = eggTypes.values().toArray(new EggData[0]);
+
+		Class<? extends EntityLiving> cls = eggs[rand.nextInt(eggs.length)].entityClass;
+		while (IBossDisplayData.class.isAssignableFrom(cls))
+			cls = eggs[rand.nextInt(eggs.length)].entityClass;
+
+		return cls;
 	}
 
 	@Override
@@ -106,7 +120,7 @@ public class ItemSpawnEggs extends ItemMonsterPlacer {
 		return egg != null ? pass == 0 ? egg.primaryColor : egg.secondaryColor : 16777215;
 	}
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item id, CreativeTabs tab, List list) {

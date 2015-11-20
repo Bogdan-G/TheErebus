@@ -1,16 +1,16 @@
 package erebus.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModTabs;
+import erebus.core.proxy.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModTabs;
-import erebus.core.proxy.CommonProxy;
 
 public class BlockPetrifiedCraftingTable extends Block {
 
@@ -30,7 +30,7 @@ public class BlockPetrifiedCraftingTable extends Block {
 		if (world.isRemote)
 			return true;
 		else {
-			player.openGui(Erebus.instance, CommonProxy.GUI_ID_PETRIFIED_CRAFT, world, x, y, z);
+			player.openGui(Erebus.instance, CommonProxy.GuiID.PETRIFIED_CRAFT.ordinal(), world, x, y, z);
 			return true;
 		}
 	}

@@ -2,6 +2,12 @@ package erebus.block;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
+import erebus.item.block.ItemBlockAmber;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -12,11 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.ISubBlocksBlock;
-import erebus.ModTabs;
-import erebus.item.block.ItemBlockAmber;
 
 public class BlockAmber extends Block implements ISubBlocksBlock {
 
@@ -60,7 +61,8 @@ public class BlockAmber extends Block implements ISubBlocksBlock {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
-		return world.getBlock(x, y, z) == this ? false : super.shouldSideBeRendered(world, x, y, z, side);
+		Block block = world.getBlock(x, y, z);
+		return block == this || block == ModBlocks.preservedBlock ? false : super.shouldSideBeRendered(world, x, y, z, side);
 	}
 
 	@Override

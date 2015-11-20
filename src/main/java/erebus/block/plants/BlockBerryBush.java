@@ -2,6 +2,15 @@ package erebus.block.plants;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.item.ItemErebusFood.FoodType;
+import erebus.item.ItemMaterials.DATA;
+import erebus.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -14,15 +23,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.item.ItemErebusFood.FoodType;
-import erebus.item.ItemMaterials.DATA;
-import erebus.lib.Reference;
 
 public class BlockBerryBush extends Block {
 
@@ -190,7 +190,7 @@ public class BlockBerryBush extends Block {
 		if (type == "heart")
 			item = new ItemStack(ModItems.heartBerries, 1);
 		if (type == "swamp")
-			item = new ItemStack(ModItems.food, 1, FoodType.swampBerries.ordinal());
+			item = new ItemStack(ModItems.food, 1, FoodType.SWAMPBERRIES.ordinal());
 		return item;
 	}
 }

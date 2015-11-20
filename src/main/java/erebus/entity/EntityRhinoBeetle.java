@@ -1,5 +1,10 @@
 package erebus.entity;
 
+import erebus.ModItems;
+import erebus.core.handler.KeyBindingHandler;
+import erebus.item.ItemMaterials;
+import erebus.network.PacketPipeline;
+import erebus.network.server.PacketBeetleRamAttack;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -25,11 +30,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.core.handler.KeyBindingHandler;
-import erebus.item.ItemMaterials;
-import erebus.network.PacketPipeline;
-import erebus.network.server.PacketBeetleRamAttack;
 
 public class EntityRhinoBeetle extends EntityTameable {
 	private final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
@@ -131,12 +131,12 @@ public class EntityRhinoBeetle extends EntityTameable {
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (getTameState() == 2)
-			entityDropItem(ItemMaterials.DATA.rhinoRidingKit.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.rhinoRidingKit.makeStack(), 0.0F);
 		int dropRate = 1 + rand.nextInt(2 + looting);
 		for (int a = 0; a < dropRate; ++a)
-			entityDropItem(ItemMaterials.DATA.plateExoRhino.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.plateExoRhino.makeStack(), 0.0F);
 		if (rand.nextInt(20) == 0)
-			entityDropItem(ItemMaterials.DATA.rhinoBeetleHorn.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.rhinoBeetleHorn.makeStack(), 0.0F);
 	}
 
 	@Override
@@ -164,6 +164,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 		if (is != null && is.getItem() == ModItems.turnip && !shagging() && getTameState() != 0) {
 			is.stackSize--;
 			shagCount = 600;
+			worldObj.playSoundEffect(posX, posY, posZ, "erebus:beetlelarvamunch", 1.0F, 0.75F);
 			return true;
 		}
 		if (is == null && getTameState() == 2) {

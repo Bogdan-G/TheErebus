@@ -1,16 +1,15 @@
 package erebus.client.render.item;
 
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.block.ModelBambooPole;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
 
 @SideOnly(Side.CLIENT)
 public class BambooPoleItemRenderer implements IItemRenderer {
@@ -52,7 +51,7 @@ public class BambooPoleItemRenderer implements IItemRenderer {
 
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x, y - 0.88F, z);
+			GL11.glTranslatef(x, y - 0.375F, z);
 			GL11.glRotatef(180F, 1F, 0, 0);
 			GL11.glRotatef(-90F, 0, 1F, 0);
 			ModelBambooPole.renderModel();

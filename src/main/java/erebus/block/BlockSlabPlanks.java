@@ -3,6 +3,12 @@ package erebus.block;
 import java.util.ArrayList;
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModTabs;
+import erebus.lib.EnumWood;
+import erebus.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,12 +19,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModTabs;
-import erebus.lib.EnumWood;
-import erebus.lib.Reference;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockSlabPlanks extends Block {
 
@@ -34,6 +35,12 @@ public class BlockSlabPlanks extends Block {
 		setStepSound(Block.soundTypeWood);
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
 		setBlockName(Reference.MOD_ID + ".slabPlanks" + wood.name());
+	}
+
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		int meta = world.getBlockMetadata(x, y, z);
+		return meta == 2 || side == ForgeDirection.UP && meta == 1 || side == ForgeDirection.DOWN && meta == 0;
 	}
 
 	@Override
@@ -83,7 +90,7 @@ public class BlockSlabPlanks extends Block {
 
 	@Override
 	public String getLocalizedName() {
-		return String.format(StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".slabPlanks.name"), wood.getTranslatedName());
+		return StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".slab_" + wood.getUnlocalisedName() + ".name");
 	}
 
 	@Override

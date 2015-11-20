@@ -3,13 +3,6 @@ package erebus;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.common.AchievementPage;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -22,17 +15,19 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
+import erebus.api.ErebusAPI;
 import erebus.client.gui.RenderWarHammerChargeBar;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.ErebusMusicHandler;
-import erebus.core.handler.BucketHandler;
-import erebus.core.handler.EntityArmchairSpawnHandler;
-import erebus.core.handler.EntityDeathEventHandler;
+import erebus.core.handler.AnvilEventsHandler;
+import erebus.core.handler.BucketFillHandler;
+import erebus.core.handler.DeathCompassRespawnEvent;
+import erebus.core.handler.EntityConstructingEvent;
 import erebus.core.handler.EntityDeathInventoryHandler;
 import erebus.core.handler.EntityPickupEventHandler;
+import erebus.core.handler.FurnaceBurnTimeHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
-import erebus.core.handler.PlayerChangedDimensionEventHandler;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.proxy.CommonProxy;
 import erebus.debug.ErebusCommandDebug;
@@ -42,6 +37,7 @@ import erebus.integration.ModIntegrationHandler;
 import erebus.integration.ThaumcraftIntegration;
 import erebus.lib.Reference;
 import erebus.network.PacketPipeline;
+import erebus.preserved.PreservableEntityRegistry;
 import erebus.recipes.ComposterRegistry;
 import erebus.recipes.ErebusRecipesHandler;
 import erebus.recipes.RecipeHandler;
@@ -49,6 +45,13 @@ import erebus.world.SpawnerErebus;
 import erebus.world.WorldProviderErebus;
 import erebus.world.feature.structure.WorldGenAntlionMaze;
 import erebus.world.teleporter.TeleporterHandler;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = "${version}", dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class Erebus {
@@ -61,6 +64,8 @@ public class Erebus {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		ErebusAPI.preservableEntityRegistry = PreservableEntityRegistry.INSTANCE;
+
 		ConfigHandler.INSTANCE.loadConfig(event);
 
 		if (event.getSide() == Side.CLIENT) {
@@ -68,13 +73,16 @@ public class Erebus {
 			MinecraftForge.EVENT_BUS.register(new RenderWarHammerChargeBar());
 			MinecraftForge.EVENT_BUS.register(new HomingBeeconTextureHandler());
 			MinecraftForge.EVENT_BUS.register(new MobGrabbingHealthBarRemoval());
-			FMLCommonHandler.instance().bus().register(new ErebusMusicHandler());
+			if (ConfigHandler.INSTANCE.playCustomSongs)
+				FMLCommonHandler.instance().bus().register(new ErebusMusicHandler());
 		}
 
 		ModFluids.init();
 		ModBlocks.init();
 		ModItems.init();
 		ModEntities.init();
+
+		ConfigHandler.INSTANCE.initOreConfigs();
 
 		AchievementPage.registerAchievementPage(new ModAchievements());
 
@@ -110,21 +118,23 @@ public class Erebus {
 		ErebusRecipesHandler.init();
 		TeleporterHandler.init();
 
-		MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());
-		MinecraftForge.EVENT_BUS.register(new EntityArmchairSpawnHandler());
-		MinecraftForge.EVENT_BUS.register(new PlayerChangedDimensionEventHandler());
 		MinecraftForge.EVENT_BUS.register(new EntityPickupEventHandler());
+		MinecraftForge.EVENT_BUS.register(new BucketFillHandler());
 		MinecraftForge.EVENT_BUS.register(ModBlocks.quickSand);
 		MinecraftForge.EVENT_BUS.register(ModFluids.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(ModItems.armorGlider);
 		MinecraftForge.EVENT_BUS.register(ModItems.jumpBoots);
-		BucketHandler.INSTANCE.buckets.put(ModBlocks.honeyBlock, ModItems.bucketHoney);
-		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
+		MinecraftForge.EVENT_BUS.register(ModBlocks.preservedBlock);
+		MinecraftForge.EVENT_BUS.register(new AnvilEventsHandler());
 		FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
 		FMLCommonHandler.instance().bus().register(SpawnerErebus.INSTANCE);
+		MinecraftForge.EVENT_BUS.register(new FurnaceBurnTimeHandler());
 
-		if (ConfigHandler.INSTANCE.graveMarker)
+		if (ConfigHandler.INSTANCE.graveMarker) {
 			MinecraftForge.EVENT_BUS.register(new EntityDeathInventoryHandler());
+			MinecraftForge.EVENT_BUS.register(new EntityConstructingEvent());
+			MinecraftForge.EVENT_BUS.register(new DeathCompassRespawnEvent());
+		}
 
 		if (ConfigHandler.INSTANCE.randomNames)
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
@@ -145,6 +155,7 @@ public class Erebus {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		ModIntegrationHandler.postInit();
+		ModBiomes.postInit();
 	}
 
 	@EventHandler

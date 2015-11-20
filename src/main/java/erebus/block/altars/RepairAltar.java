@@ -1,16 +1,17 @@
 package erebus.block.altars;
 
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.tileentity.TileEntityErebusAltarRepair;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.tileentity.TileEntityErebusAltarRepair;
 
 public class RepairAltar extends AltarAbstract {
+
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityErebusAltarRepair();
@@ -40,7 +41,7 @@ public class RepairAltar extends AltarAbstract {
 					is.getItem().setDamage(is, -repairDamage);
 				}
 				if (te.getSpawnTicks() % 2 == 0 && te.getCollisions() < 101)
-					if(world.isRemote)
+					if (world.isRemote)
 						te.sparky(world, x, y, z);
 			}
 			if (te.getCollisions() > 101)

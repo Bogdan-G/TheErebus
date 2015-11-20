@@ -14,7 +14,7 @@ public class ItemBlockErebusStigma extends ItemBlockGeneric {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		String colour = EnumColour.values()[Utils.getFlowerMetadata(stack)].getTranslatedName();
-		return String.format(StatCollector.translateToLocal(getUnlocalizedName() + ".name"), colour);
+		String colour = EnumColour.values()[Utils.getFlowerMetadata(stack)].getUnlocalisedName();
+		return StatCollector.translateToLocal(getUnlocalizedName() + "_" + colour + ".name");
 	}
 }

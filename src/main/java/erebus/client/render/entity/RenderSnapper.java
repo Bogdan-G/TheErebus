@@ -1,24 +1,24 @@
 package erebus.client.render.entity;
 
+import org.lwjgl.opengl.GL11;
+
+import erebus.client.model.entity.ModelSnapper;
+import erebus.entity.EntitySnapper;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
-
-import erebus.client.model.entity.ModelSnapper;
-import erebus.entity.EntitySnapper;
-
 public class RenderSnapper extends RenderLiving {
 
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/snapper.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/snapper.png");
 
 	public RenderSnapper() {
-		super(new ModelSnapper(), 1F);
+		super(new ModelSnapper(), 0F);
 	}
 
-	protected void preRenderCallback(EntityLivingBase entity, float par2) {
+	@Override
+	protected void preRenderCallback(EntityLivingBase entity, float partialTickTime) {
 		EntitySnapper snapper = (EntitySnapper) entity;
 		if (!snapper.onGround) {
 			int yaw = (int) snapper.getDataWatcher().getWatchableObjectFloat(20);
@@ -69,6 +69,6 @@ public class RenderSnapper extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+		return TEXTURE;
 	}
 }

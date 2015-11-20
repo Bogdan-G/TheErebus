@@ -3,11 +3,13 @@ package erebus.item;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -19,6 +21,12 @@ public class ItemHomingBeecon extends Item {
 	public ItemHomingBeecon() {
 		setMaxStackSize(1);
 		setCreativeTab(ModTabs.specials);
+		setUnlocalizedName("erebus.homingBeecon");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg) {
 	}
 
 	@Override
@@ -27,29 +35,26 @@ public class ItemHomingBeecon extends Item {
 		return HomingBeeconTextureHandler.beecon;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
-		if (hasTag(is))
-			if (is.stackTagCompound != null && is.stackTagCompound.hasKey("homeX")) {
-				list.add("Dimension: " + is.getTagCompound().getString("dimName"));
-				list.add("Target X: " + is.getTagCompound().getInteger("homeX"));
-				list.add("Target Z: " + is.getTagCompound().getInteger("homeZ"));
-			} else {
-				list.add("Sneak + Click on a Block");
-				list.add("to set as target.");
-			}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
+		if (hasTag(stack) && stack.stackTagCompound.hasKey("homeX")) {
+			list.add(StatCollector.translateToLocalFormatted("tooltip.erebus.dimension", stack.getTagCompound().getString("dimName")));
+			list.add(StatCollector.translateToLocalFormatted("tooltip.erebus.targetx", stack.getTagCompound().getInteger("homeX")));
+			list.add(StatCollector.translateToLocalFormatted("tooltip.erebus.targetz", stack.getTagCompound().getInteger("homeZ")));
+		} else
+			list.add(StatCollector.translateToLocal("tooltip.erebus.homingbeecon"));
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote && hasTag(is) && player.isSneaking()) {
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+		if (!world.isRemote && hasTag(stack) && player.isSneaking()) {
 			Block block = world.getBlock(x, y, z);
 			if (!world.isRemote && block != null) {
-				is.getTagCompound().setString("dimName", player.worldObj.provider.getDimensionName());
-				is.getTagCompound().setInteger("homeX", x);
-				is.getTagCompound().setInteger("homeZ", z);
+				stack.getTagCompound().setString("dimName", player.worldObj.provider.getDimensionName());
+				stack.getTagCompound().setInteger("homeX", x);
+				stack.getTagCompound().setInteger("homeZ", z);
 				player.swingItem();
 				return true;
 			}

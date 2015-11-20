@@ -2,6 +2,9 @@ package erebus.block.bamboo;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -9,9 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
 
 public class BlockBambooTorch extends Block {
 
@@ -68,15 +68,13 @@ public class BlockBambooTorch extends Block {
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		Block block = world.getBlock(x, y - 1, z);
 
-		if (world.getBlockMetadata(x, y, z) == 0) {
-			if (block == null || !world.isAirBlock(x, y + 1, z))
-				return false;
-			if (block == this && (world.getBlockMetadata(x, y - 1, z) & 7) == 7)
-				return true;
-			if (!block.isLeaves(world, x, y - 1, z) && !block.isOpaqueCube())
-				return false;
-			world.setBlock(x, y + 1, z, this, 1, 3);
-		}
+		if (block == null || !world.isAirBlock(x, y + 1, z))
+			return false;
+		if (block == this && (world.getBlockMetadata(x, y - 1, z) & 7) == 7)
+			return true;
+		if (block.isLeaves(world, x, y - 1, z))
+			return false;
+		world.setBlock(x, y + 1, z, this, 1, 3);
 		return block.getMaterial().blocksMovement();
 	}
 
@@ -102,10 +100,8 @@ public class BlockBambooTorch extends Block {
 			world.setBlockToAir(x, y - 1, z);
 		if (world.getBlock(x, y + 1, z) == this)
 			world.setBlockToAir(x, y + 1, z);
-		if (world.getBlock(x, y, z) == this) {
+		if (world.getBlock(x, y + 1, z) == this || world.getBlock(x, y - 1, z) == this)
 			dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlockToAir(x, y + 1, z);
-		}
 	}
 
 	@Override

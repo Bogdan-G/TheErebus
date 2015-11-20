@@ -1,15 +1,14 @@
 package erebus.client.render.item;
 
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.IItemRenderer;
 
 @SideOnly(Side.CLIENT)
 public class BambooTorchItemRenderer implements IItemRenderer {
@@ -62,7 +61,7 @@ public class BambooTorchItemRenderer implements IItemRenderer {
 	private void renderTorch(float x, float y, float z, double size) {
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x, y - 1.37F, z);
+			GL11.glTranslatef(x, y - 0.625F, z);
 			GL11.glScaled(0.75F, 0.75F, 0.75F);
 			blockRenderer.renderBlockAsItem(ModBlocks.bambooTorch, 0, 1.0F);
 			GL11.glTranslatef(x, y, z);

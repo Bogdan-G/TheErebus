@@ -1,5 +1,11 @@
 package erebus.client.render.entity;
 
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.client.model.entity.ModelTarantula;
+import erebus.entity.EntityTarantulaMiniboss;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
@@ -7,20 +13,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.client.model.entity.ModelTarantula;
-import erebus.entity.EntityTarantulaMiniboss;
-
 @SideOnly(Side.CLIENT)
 public class RenderTarantulaMiniboss extends RenderLiving {
 
 	private final ResourceLocation resource1 = new ResourceLocation("erebus:textures/entity/tarantula.png");
 	private final ResourceLocation resource2 = new ResourceLocation("erebus:textures/entity/tarantulaTurqoise.png");
 	private final ResourceLocation resource3 = new ResourceLocation("erebus:textures/entity/power.png");
-	private final ModelBase model = new ModelTarantula();
+	private final ModelBase overlayModel = new ModelTarantula(1.0F);
 
 	public RenderTarantulaMiniboss() {
 		super(new ModelTarantula(), 0.5F);
@@ -58,7 +57,7 @@ public class RenderTarantulaMiniboss extends RenderLiving {
 				GL11.glLoadIdentity();
 				float yScroll = scrollTimer * 0.02F;
 				GL11.glTranslatef(0F, yScroll, 0.0F);
-				setRenderPassModel(model);
+				setRenderPassModel(overlayModel);
 				GL11.glMatrixMode(GL11.GL_MODELVIEW);
 				GL11.glEnable(GL11.GL_BLEND);
 				float colour = 0.5F;
@@ -87,11 +86,6 @@ public class RenderTarantulaMiniboss extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		EntityTarantulaMiniboss tarantula = (EntityTarantulaMiniboss) entity;
-		if (tarantula.getHealth() >= 150)
-			return resource2;
-		else
-			return resource1;
+		return ((EntityTarantulaMiniboss) entity).getHealth() >= 150 ? resource2 : resource1;
 	}
-
 }

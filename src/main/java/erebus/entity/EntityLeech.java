@@ -135,9 +135,11 @@ public class EntityLeech extends EntityMob {
 	}
 
 	@Override
-	protected void dropFewItems(boolean hit, int amount) {
-		int count = 1 + getBloodConsumed();
-		dropItem(ModItems.lifeBlood, count);
+	protected void dropFewItems(boolean recentlyHit, int amount) {
+		if (recentlyHit) {
+			int count = 1 + getBloodConsumed();
+			dropItem(ModItems.lifeBlood, count);
+		}
 	}
 
 	@Override

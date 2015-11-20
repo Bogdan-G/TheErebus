@@ -1,5 +1,10 @@
 package erebus.block.bamboo;
 
+import erebus.Erebus;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.tileentity.TileEntityExtenderThingy;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockPistonBase;
@@ -10,11 +15,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import erebus.Erebus;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.tileentity.TileEntityExtenderThingy;
 
 public class BlockExtenderThingy extends BlockContainer {
 
@@ -49,7 +49,7 @@ public class BlockExtenderThingy extends BlockContainer {
 			return true;
 
 		if (world.getTileEntity(x, y, z) != null)
-			player.openGui(Erebus.instance, CommonProxy.GUI_ID_EXTENDER_THINGY, world, x, y, z);
+			player.openGui(Erebus.instance, CommonProxy.GuiID.EXTENDER_THINGY.ordinal(), world, x, y, z);
 
 		return true;
 	}

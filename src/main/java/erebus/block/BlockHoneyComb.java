@@ -2,6 +2,14 @@ package erebus.block;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.tileentity.TileEntityHoneyComb;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -12,14 +20,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.tileentity.TileEntityHoneyComb;
 
 public class BlockHoneyComb extends BlockContainer {
 
@@ -68,7 +68,7 @@ public class BlockHoneyComb extends BlockContainer {
 				ItemStack current = player.inventory.getCurrentItem();
 				if (current != null && current.getItem() == Item.getItemFromBlock(this) || current != null && current.getItem() == ModItems.beeTamingAmulet)
 					return false;
-				player.openGui(Erebus.instance, CommonProxy.GUI_ID_HONEY_COMB, world, x, y, z);
+				player.openGui(Erebus.instance, CommonProxy.GuiID.HONEY_COMB.ordinal(), world, x, y, z);
 			}
 		return true;
 	}

@@ -6,6 +6,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import erebus.Erebus;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.entity.ai.EntityAIAntBonemealCrops;
+import erebus.entity.ai.EntityAIAntHarvestCrops;
+import erebus.entity.ai.EntityAIAntPlantCrops;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -30,14 +38,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import erebus.Erebus;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.entity.ai.EntityAIAntBonemealCrops;
-import erebus.entity.ai.EntityAIAntHarvestCrops;
-import erebus.entity.ai.EntityAIAntPlantCrops;
 
 public class EntityBlackAnt extends EntityTameable implements IInventory {
 
@@ -158,7 +158,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	public void openGUI(EntityPlayer player) {
-		player.openGui(Erebus.instance, CommonProxy.GUI_ID_ANT_INVENTORY, player.worldObj, getEntityId(), 0, 0);
+		player.openGui(Erebus.instance, CommonProxy.GuiID.ANT_INVENTORY.ordinal(), player.worldObj, getEntityId(), 0, 0);
 	}
 
 	@Override
@@ -263,7 +263,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 				moveToSilo();
 				Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
 				if (block == ModBlocks.siloTank)
-					if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 1.5D) {
+					if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 2D) {
 						addDropToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
 						canAddToSilo = false;
 						canPickupItems = true;
@@ -280,7 +280,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 				moveToSilo();
 				Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
 				if (block == ModBlocks.siloTank)
-					if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 1.5D) {
+					if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 2D) {
 						getStackFromSilo();
 						canCollectFromSilo = false;
 					}

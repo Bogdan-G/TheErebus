@@ -1,5 +1,10 @@
 package erebus.block.bamboo;
 
+import erebus.Erebus;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.tileentity.TileEntityBambooCrate;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -9,11 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import erebus.Erebus;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.tileentity.TileEntityBambooCrate;
 
 public class BlockBambooCrate extends BlockContainer {
 
@@ -124,14 +124,14 @@ public class BlockBambooCrate extends BlockContainer {
 				ItemStack current = player.inventory.getCurrentItem();
 				if (current != null && current.getItem() == Item.getItemFromBlock(this))
 					return false;
-				player.openGui(Erebus.instance, CommonProxy.GUI_ID_BAMBOO_CRATE, world, x, y, z);
+				player.openGui(Erebus.instance, CommonProxy.GuiID.BAMBOO_CRATE.ordinal(), world, x, y, z);
 			} else
 				for (int i = -1; i <= 1; i++)
 					for (int j = -1; j <= 1; j++)
 						for (int k = -1; k <= 1; k++)
 							if (world.getBlock(x + i, y + k, z + j) == this)
 								if (world.getBlockMetadata(x + i, y + k, z + j) == 1) {
-									player.openGui(Erebus.instance, CommonProxy.GUI_ID_COLOSSAL_CRATE, world, x + i, y + k, z + j);
+									player.openGui(Erebus.instance, CommonProxy.GuiID.COLOSSAL_CRATE.ordinal(), world, x + i, y + k, z + j);
 									return true;
 								}
 		return true;
@@ -167,11 +167,10 @@ public class BlockBambooCrate extends BlockContainer {
 	}
 
 	private void resetCrates(World world, int x, int y, int z, int meta) {
-		if (meta != 0)
-			for (int i = -1; i <= 1; i++)
-				for (int j = -1; j <= 1; j++)
-					for (int k = -1; k <= 1; k++)
-						if (world.getBlock(x + i, y + k, z + j) == this && world.getBlockMetadata(x + i, y + k, z + j) != 0)
-							world.setBlockMetadataWithNotify(x + i, y + k, z + j, 0, 3);
+		for (int i = -1; i <= 1; i++)
+			for (int j = -1; j <= 1; j++)
+				for (int k = -1; k <= 1; k++)
+					if (world.getBlock(x + i, y + k, z + j) == this && world.getBlockMetadata(x + i, y + k, z + j) != 0)
+						world.setBlockMetadataWithNotify(x + i, y + k, z + j, 0, 3);
 	}
 }

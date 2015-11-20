@@ -2,7 +2,14 @@ package erebus.entity;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
 import erebus.item.ItemErebusFood;
+import erebus.item.ItemMaterials;
+import erebus.tileentity.TileEntityTitanChest;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -31,13 +38,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.item.ItemMaterials;
-import erebus.tileentity.TileEntityTitanChest;
 
 public class EntityTitanBeetle extends EntityTameable {
 
@@ -191,12 +191,12 @@ public class EntityTitanBeetle extends EntityTameable {
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (getTameState() >= 2)
-			entityDropItem(ItemMaterials.DATA.rhinoRidingKit.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.rhinoRidingKit.makeStack(), 0.0F);
 		int var3 = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
 		for (int a = 0; a < var3; ++a)
-			entityDropItem(ItemMaterials.DATA.plateExo.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.plateExo.makeStack(), 0.0F);
 
-		entityDropItem(new ItemStack(ModItems.food, 1 + rand.nextInt(1), isBurning() ? ItemErebusFood.FoodType.titanChopCooked.ordinal() : ItemErebusFood.FoodType.titanChop.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.food, 1 + rand.nextInt(1), isBurning() ? ItemErebusFood.FoodType.TITAN_CHOP_COOKED.ordinal() : ItemErebusFood.FoodType.TITAN_CHOP_RAW.ordinal()), 0.0F);
 		dropChests();
 	}
 
@@ -254,6 +254,7 @@ public class EntityTitanBeetle extends EntityTameable {
 		if (is != null && is.getItem() == ModItems.turnip && !shagging() && getTameState() != 0) {
 			is.stackSize--;
 			shagCount = 600;
+			worldObj.playSoundEffect(posX, posY, posZ, "erebus:beetlelarvamunch", 1.0F, 0.75F);
 			return true;
 		}
 		if (is == null && getTameState() >= 2) {

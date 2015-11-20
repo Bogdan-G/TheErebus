@@ -1,10 +1,5 @@
 package erebus.client.render.item;
 
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -12,6 +7,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.block.ModelBambooBridge;
 import erebus.tileentity.TileEntityBambooBridge;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
 
 @SideOnly(Side.CLIENT)
 public class BambooBridgeItemRenderer implements IItemRenderer {
@@ -59,9 +58,10 @@ public class BambooBridgeItemRenderer implements IItemRenderer {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x, y + 0.1875F, z);
+			GL11.glTranslatef(x, y + 0.4F, z);
 			GL11.glRotatef(180F, 1F, 0, 0);
 			GL11.glRotatef(90F, 0, 1F, 0);
+			GL11.glScaled(size + 0.2D, size + 0.2D, size + 0.2D);
 			ModelBambooBridge.render(te);
 			GL11.glPopMatrix();
 		} else {

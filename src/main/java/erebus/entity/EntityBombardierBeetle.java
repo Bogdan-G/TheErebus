@@ -1,5 +1,8 @@
 package erebus.entity;
 
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.ai.EntityAIExplodeAttackOnCollide;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -14,9 +17,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.entity.ai.EntityAIExplodeAttackOnCollide;
-import erebus.item.ItemMaterials;
 
 public class EntityBombardierBeetle extends EntityMob {
 	private final float explosionRadius = 2;
@@ -41,9 +41,9 @@ public class EntityBombardierBeetle extends EntityMob {
 	}
 
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	@Override
 	public void onUpdate() {
@@ -51,12 +51,10 @@ public class EntityBombardierBeetle extends EntityMob {
 		collideTick++;
 		if (collideTick > 20 || getAttackTarget() == null)
 			collideTick = 0;
-		if (getAttackTarget() != null) {
-			if (!worldObj.isRemote && isCollidedHorizontally) {
+		if (getAttackTarget() != null)
+			if (!worldObj.isRemote && isCollidedHorizontally)
 				if (collideTick == 20)
 					clearpath();
-			}
-		}
 	}
 
 	@Override
@@ -100,7 +98,7 @@ public class EntityBombardierBeetle extends EntityMob {
 		dropItem(Items.blaze_powder, 1);
 		int var3 = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
 		for (int a = 0; a < var3; ++a)
-			entityDropItem(ItemMaterials.DATA.plateExo.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.plateExo.makeStack(), 0.0F);
 	}
 
 	@Override
@@ -112,12 +110,10 @@ public class EntityBombardierBeetle extends EntityMob {
 
 	private void clearpath() {
 		boolean rule = worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
-		double direction = Math.toRadians(rotationYaw);
 		double x = posX;
 		double y = posY;
 		double z = posZ;
-		if (ConfigHandler.INSTANCE.bombardierBlockDestroy == true) {
-			worldObj.createExplosion(this, x, y + 1, z, explosionRadius, rule); 
-		}
+		if (ConfigHandler.INSTANCE.bombardierBlockDestroy == true)
+			worldObj.createExplosion(this, x, y + 1, z, explosionRadius, rule);
 	}
 }

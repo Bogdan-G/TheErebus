@@ -9,6 +9,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
@@ -16,8 +17,8 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public class EntityScytodes extends EntityMob {
+
 	private int shouldDo;
-	public int skin = rand.nextInt(4);
 
 	public EntityScytodes(World world) {
 		super(world);
@@ -29,6 +30,7 @@ public class EntityScytodes extends EntityMob {
 	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(16, new Byte((byte) 0));
+		dataWatcher.addObject(30, new Integer(rand.nextInt(4)));
 	}
 
 	@Override
@@ -193,5 +195,28 @@ public class EntityScytodes extends EntityMob {
 			}
 		}
 		return (IEntityLivingData) entityLivingData1;
+	}
+
+	public void setSkin(int skinType) {
+		dataWatcher.updateObject(30, new Integer(skinType));
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger("skin", getSkin());
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		if (nbt.hasKey("skin"))
+			setSkin(nbt.getInteger("skin"));
+		else
+			setSkin(rand.nextInt(4));
+	}
+
+	public int getSkin() {
+		return dataWatcher.getWatchableObjectInt(30);
 	}
 }

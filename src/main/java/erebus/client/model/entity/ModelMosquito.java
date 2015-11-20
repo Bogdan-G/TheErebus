@@ -1,14 +1,13 @@
 package erebus.client.model.entity;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityMosquito;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
 
 @SideOnly(Side.CLIENT)
 public class ModelMosquito extends ModelBase {
@@ -206,8 +205,14 @@ public class ModelMosquito extends ModelBase {
 		ArmLeft2.render(f5);
 		ArmRight1.render(f5);
 		ArmRight2.render(f5);
+
+		GL11.glPushMatrix();
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		WingLeft.render(f5);
 		WingRight.render(f5);
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glPopMatrix();
 
 		GL11.glPopMatrix();
 		GL11.glPushMatrix();

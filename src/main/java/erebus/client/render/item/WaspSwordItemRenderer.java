@@ -1,16 +1,15 @@
 package erebus.client.render.item;
 
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.item.ModelWaspSword;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
 
 @SideOnly(Side.CLIENT)
 public class WaspSwordItemRenderer implements IItemRenderer {
@@ -66,7 +65,7 @@ public class WaspSwordItemRenderer implements IItemRenderer {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x - 0.2F, y - 1.0F, z);
+			GL11.glTranslatef(x - 0.125F, y - 0.475F, z);
 			GL11.glRotatef(180F, 1F, 0, 0);
 			GL11.glRotatef(45F, 0, 0, 1F);
 			GL11.glScaled(0.3F, 0.3F, 0.3F);

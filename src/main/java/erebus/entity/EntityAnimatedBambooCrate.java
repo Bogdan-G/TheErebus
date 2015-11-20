@@ -1,6 +1,11 @@
 package erebus.entity;
 
-import net.minecraft.entity.ai.EntityAITempt;
+import erebus.Erebus;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.entity.ai.EntityAIBlockFollowOwner;
+import erebus.tileentity.TileEntityBambooCrate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -8,11 +13,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.Erebus;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.tileentity.TileEntityBambooCrate;
 
 public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements IInventory {
 
@@ -24,7 +24,8 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 		tasks.removeTask(aiWander);
 		tasks.removeTask(aiAttackOnCollide);
 		tasks.removeTask(aiAttackNearestTarget);
-		tasks.addTask(1, new EntityAITempt(this, 1.0D, ModItems.wandOfAnimation, false));
+		tasks.addTask(1, new EntityAIBlockFollowOwner(this, 1.0D, 10.0F, 2.0F));
+		isImmuneToFire = true;
 	}
 
 	public EntityAnimatedBambooCrate setContents(IInventory chest) {
@@ -71,7 +72,7 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 				chest.setInventorySlotContents(i, inventory[i]);
 			return true;
 		} else {
-			player.openGui(Erebus.instance, CommonProxy.GUI_ID_ANIMATED_BAMBOO_CRATE, player.worldObj, getEntityId(), 0, 0);
+			player.openGui(Erebus.instance, CommonProxy.GuiID.ANIMATED_BAMBOO_CRATE.ordinal(), player.worldObj, getEntityId(), 0, 0);
 			return true;
 		}
 	}
@@ -190,5 +191,9 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 	public void markDirty() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	protected void fall(float distance) {
 	}
 }

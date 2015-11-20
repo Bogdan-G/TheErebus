@@ -1,11 +1,11 @@
 package erebus.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockStairs;
-import net.minecraft.util.StatCollector;
 import erebus.ModTabs;
 import erebus.lib.EnumWood;
 import erebus.lib.Reference;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockStairs;
+import net.minecraft.util.StatCollector;
 
 public class BlockStairPlanks extends BlockStairs {
 
@@ -23,6 +23,6 @@ public class BlockStairPlanks extends BlockStairs {
 
 	@Override
 	public String getLocalizedName() {
-		return String.format(StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".stairPlanks.name"), wood.getTranslatedName());
+		return StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".stairs_" + wood.getUnlocalisedName() + ".name");
 	}
 }
